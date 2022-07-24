@@ -8,6 +8,7 @@ function Doa() {
   const [circle, setCircle] = useState(false);
   const [end, setEnd] = useState(false);
   let [page, setPage] = useState(1);
+  const [lastpage, setLastPage] = useState(1);
   const [loading, setLoading] = useState(true);
 
   const getDoa = async () => {
@@ -15,14 +16,16 @@ function Doa() {
       `https://api-islamic.herokuapp.com/api/doa?page=${page}`
     );
     const data = await response.json();
+    setLastPage(data.last_page);
     setLoading(false)
-    if (page <= 9) {
+    if (page <= lastpage) {
       setCircle(true);
       setIsNext(false)
       setDoa([...doa, ...data.data]);
       setPage(page + 1)
     } else {
       setCircle(false)
+      setEnd(true)
     }
   };
 
@@ -31,9 +34,9 @@ function Doa() {
   }
 
   function getMoreDoa() {
-    setTimeout(() => {
-      getDoa();
-    }, 1000);
+    // setTimeout(() => {
+    getDoa();
+    // }, 1);
   }
 
   useEffect(() => {
@@ -100,7 +103,7 @@ function Doa() {
           />
         </Center>
       }
-      {end && <Text>End of data</Text>}
+      {end && <Text mt='20px' textAlign={'center'}>Anda telah berada di akhir halaman</Text>}
       <Modal useInert={false} isCentered isOpen={isOpen} size="2xl" onClose={onClose} scrollBehavior='outside'>
         {overlay}
         <ModalContent>

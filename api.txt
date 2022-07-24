@@ -1,3 +1,5 @@
 doa
-https://tanyadoa-api.herokuapp.com/
+https://doa-doa-api-ahmadramadhan.fly.dev/
+https://api.myquran.com/
 
+<a target="_blank" href="https://icons8.com/icon/CmsNPHks3Lix/quran">Quran</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>

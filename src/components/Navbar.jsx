@@ -12,10 +12,12 @@ import {
   MenuItem,
   useColorModeValue,
   Stack,
-  Container,
+  Spacer,
   useColorMode,
+  Text
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon, HamburgerIcon } from '@chakra-ui/icons';
+import Logo from "../assets/logo.png";
 
 const Links = [
   {
@@ -23,8 +25,16 @@ const Links = [
     link: '/',
   },
   {
+    name: 'Quran',
+    link: '/quran',
+  },
+  {
     name: 'Doa',
     link: '/doa',
+  },
+  {
+    name: 'Tahlil',
+    link: '/tahlil',
   },
 ]
 
@@ -32,37 +42,38 @@ function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   let resolved = useResolvedPath(location.pathname);
   return (
-    <Box position={'sticky'} width="100%" top={0} bg={useColorModeValue('gray.500', 'gray.900')} px={4}>
-      <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-        <HStack spacing={8} alignItems={'center'}>
-          <Box>Logo</Box>
-          <Container>
-            <HStack
-              as={'nav'}
-              spacing={4}
-              display={{ base: 'none', md: 'flex' }}>
-              {Links.map((link, index) => (
-                <Link
-                  key={index}
-                  as={Href}
-                  px={2}
-                  py={1}
-                  rounded={'md'}
-                  _hover={{
-                    textDecoration: 'none',
-                    bg: useColorModeValue('gray.700', 'gray.700'),
-                  }}
-                  bg={resolved.pathname === link.link && 'gray.700'}
-                  color={'white'}
-                  to={link.link}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </HStack>
-          </Container>
+    <Box position={'sticky'} zIndex="999" width="100%" top={0} bg='gray.900' px={4}>
+      <Flex h={16} alignItems={'center'}>
+        <HStack alignItems={'center'}>
+          <img src={Logo} alt="Qur'an Digital" />
+          <Text fontSize='2xl' color={'white'} display={{ base: 'none', md: 'flex' }} ml="10px">Islamic App</Text>
         </HStack>
-
+        <Spacer />
+        <HStack
+          as={'nav'}
+          mr={{ md: '50', lg: '200px' }}
+          spacing={8}
+          display={{ base: 'none', md: 'flex' }}>
+          {Links.map((link, index) => (
+            <Link
+              key={index}
+              as={Href}
+              px={2}
+              py={1}
+              rounded={'md'}
+              _hover={{
+                textDecoration: 'none',
+                bg: useColorModeValue('gray.600', 'gray.600'),
+              }}
+              bg={resolved.pathname === link.link && 'gray.500'}
+              color={'white'}
+              to={link.link}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </HStack>
+        <Spacer />
         <Flex alignItems={'center'}>
           <Stack direction={'row'} spacing={7}>
             <Button onClick={toggleColorMode}>

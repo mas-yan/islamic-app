@@ -42,16 +42,16 @@ function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   let resolved = useResolvedPath(location.pathname);
   return (
-    <Box position={'sticky'} zIndex="999" width="100%" top={0} bg='gray.900' px={4}>
+    <Box zIndex="999" fontWeight={'bold'} width="100%" boxShadow='md' position={'sticky'} top={0} backdropFilter='auto' backdropBlur='8px' px={4}>
       <Flex h={16} alignItems={'center'}>
         <HStack alignItems={'center'}>
           <img src={Logo} alt="Qur'an Digital" />
-          <Text fontSize='2xl' color={'white'} display={{ base: 'none', md: 'flex' }} ml="10px">Islamic App</Text>
+          <Text fontSize='2xl' display={{ base: 'none', md: 'flex' }} ml="10px">Islamic App</Text>
         </HStack>
         <Spacer />
         <HStack
           as={'nav'}
-          mr={{ md: '50', lg: '200px' }}
+          mr={{ md: '50', lg: '150px' }}
           spacing={8}
           display={{ base: 'none', md: 'flex' }}>
           {Links.map((link, index) => (
@@ -63,10 +63,11 @@ function Navbar() {
               rounded={'md'}
               _hover={{
                 textDecoration: 'none',
-                bg: useColorModeValue('gray.600', 'gray.600'),
+                bg: 'gray.500',
+                color: 'white',
               }}
-              bg={resolved.pathname === link.link && 'gray.500'}
-              color={'white'}
+              bg={useColorModeValue(resolved.pathname === link.link ? 'gray.700' : 'white', resolved.pathname === link.link ? 'white' : 'gray.800')}
+              color={useColorModeValue(resolved.pathname === link.link ? 'white' : 'gray.700', resolved.pathname === link.link ? 'gray.700' : 'white')}
               to={link.link}
             >
               {link.name}

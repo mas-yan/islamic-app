@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Heading, Text, SimpleGrid, SkeletonText, Circle, HStack, Spacer, useColorModeValue } from '@chakra-ui/react'
+import { Box, Heading, Text, Container, SimpleGrid, SkeletonText, Circle, HStack, Spacer, useColorModeValue } from '@chakra-ui/react'
 
 function Alquran() {
   const [loading, setLoading] = useState(true);
@@ -20,7 +20,7 @@ function Alquran() {
 
 
   return (
-    <div>
+    <Container maxW='container.xl' my={'30px'}>
       {!loading > 0 ?
         <SimpleGrid columns={{ base: '1', md: '3' }} spacingX='40px' spacingY='20px'>
           {quran.map((item) => (
@@ -49,7 +49,7 @@ function Alquran() {
         </SimpleGrid>
       }
 
-    </div >
+    </Container >
   )
 }
 

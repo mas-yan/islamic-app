@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Modal, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, ModalOverlay, Box, Heading, useDisclosure, Spinner, Button, Text, SimpleGrid, SkeletonText, Circle, Center, useColorModeValue } from '@chakra-ui/react'
+import { Modal, ModalContent, Container, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, ModalOverlay, Box, Heading, useDisclosure, Spinner, Button, Text, SimpleGrid, SkeletonText, Circle, Center, useColorModeValue } from '@chakra-ui/react'
 function Doa() {
 
   // get all start
@@ -81,7 +81,7 @@ function Doa() {
   // end detail
 
   return (
-    <div>
+    <Container maxW='container.xl' my={'30px'}>
       <SimpleGrid columns={{ base: '1', md: '4' }} spacingX='40px' spacingY='20px'>
         {doa.map((item, index) => (
           <Box key={index} p={5} shadow='md' borderWidth='1px' rounded={'md'} onClick={() => detailDoa(item.id)} cursor="pointer">
@@ -141,7 +141,7 @@ function Doa() {
           )}
         </SimpleGrid>
       }
-    </div >
+    </Container >
   );
 }
 

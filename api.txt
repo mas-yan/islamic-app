@@ -1,5 +1,9 @@
-doa
-https://doa-doa-api-ahmadramadhan.fly.dev/
 https://api.myquran.com/
 
+quran
 <a target="_blank" href="https://icons8.com/icon/CmsNPHks3Lix/quran">Quran</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+
+http://api.aladhan.com/v1/calendarByCity?city=kendal&country=Indonesia&method=2&month=07&year=2022
+
+sun
+<a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Smashicons - Flaticon</a>

@@ -97,7 +97,8 @@ function Navbar() {
                     }}
                     to={link.link}
                   >
-                    <MenuItem >
+                    <MenuItem bg={useColorModeValue(resolved.pathname === link.link ? 'gray.700' : 'white', resolved.pathname === link.link ? 'white' : 'gray.800')}
+                      color={useColorModeValue(resolved.pathname === link.link ? 'white' : 'gray.700', resolved.pathname === link.link ? 'gray.700' : 'white')}>
                       {link.name}
                     </MenuItem>
                   </Link>

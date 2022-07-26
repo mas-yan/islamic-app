@@ -4,7 +4,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
@@ -12,41 +11,50 @@ import {
   Text,
   useColorModeValue,
   SimpleGrid,
-  Button,
   Container
 } from '@chakra-ui/react';
 import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 import './style.css';
+import Select from 'react-select'
 
-function Location() {
-  return (
-    <div>
-      asas
-    </div>
-  )
-}
-
+const fromLocal = JSON.parse(localStorage.getItem('kota') || JSON.stringify({ value: '1301', label: 'KOTA JAKARTA' }));
 function Jadwal() {
   const [jadwal, setJadwal] = useState([])
-  const [kota, setKota] = useState('')
+  const [lokasi, setLokasi] = useState();
+  const [kota, setKota] = useState(fromLocal)
   const [day, setDay] = useState()
-
+  const [select, setSelect] = useState()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  const getLokasi = async () => {
+    const response = await fetch(
+      `https://api.myquran.com/v1/sholat/kota/semua`
+    );
+    const data = await response.json();
+    const option = []
+    data.map((item) => {
+      option.push({
+        value: item.id,
+        label: item.lokasi
+      })
+    })
+    setLokasi(option)
+  }
 
   const getJadwal = async () => {
-
     const date = new Date()
     const now = day ? day : `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
     const response = await fetch(
-      `https://api.myquran.com/v1/sholat/jadwal/1301/${now}`
+      `https://api.myquran.com/v1/sholat/jadwal/${kota.value}/${now}`
     );
     const data = await response.json();
     setJadwal(data.data.jadwal)
-    setKota(data.data.lokasi)
+    setKota({
+      value: data.data.id,
+      label: data.data.lokasi
+    })
   }
-
   const setNow = (newDate) => {
     const date = newDate || new Date();
     setDay(date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate())
@@ -69,35 +77,45 @@ function Jadwal() {
     const previousDate = new Date(previousDayInMilli)
     setNow(previousDate)
   }
+
+  const changeLocation = e => {
+    setSelect(e)
+    setKota(e)
+    onClose()
+  }
+
   useEffect(() => {
-    getJadwal()
-  }, [day])
+    getJadwal();
+    getLokasi()
+    localStorage.setItem('kota', JSON.stringify(kota))
+  }, [day, select])
+
   return (
     <Box className="widget-header" textAlign={'center'} position={'absolute'} bottom='0' bg={useColorModeValue('gray.100', 'gray.600')} color='black'>
-      <Heading mt={2} fontSize={{ base: 'sm', md: 'xl' }}>
-        <Text display={'inline'} color={useColorModeValue('blue.700', 'white')} fontWeight='bold'>Waktu Sholat Daerah {kota}</Text>
+      <Heading mt={2} fontSize={{ base: 'xs', md: 'xl' }}>
+        <Text display={'inline'} color={useColorModeValue('blue.700', 'white')} fontWeight='bold'>Waktu Sholat Daerah {kota.label}</Text>
         <button onClick={onOpen}><TriangleDownIcon color={useColorModeValue('blue.700', 'white')} pb={{ base: 1, md: 2 }} pl='1' w={{ base: 5, md: 6 }} h={{ base: 5, md: 6 }} /></button>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
+            <ModalHeader>Ubah Lokasi Anda</ModalHeader>
             <ModalCloseButton />
-            <ModalBody>
-              <Location />
+            <ModalBody color={'black'}>
+              <div>
+                <Select
+                  options={lokasi}
+                  onChange={(e) => {
+                    changeLocation(e)
+                  }} />
+              </div>
+              <Text display={'inline'} mt={'100px'} color={useColorModeValue('blue.700', 'white')} fontWeight='bold'>Lokasi Sekarang: {kota.label}</Text>
             </ModalBody>
-
-            <ModalFooter>
-              <Button colorScheme='blue' mr={3} onClick={onClose}>
-                Close
-              </Button>
-              <Button variant='ghost'>Secondary Action</Button>
-            </ModalFooter>
           </ModalContent>
         </Modal>
       </Heading>
-      <button style={{ margin: '0 10px' }} onClick={() => { getPreviousDate() }}><ArrowLeftIcon color={useColorModeValue('blue.700', 'white')} /></button>
-      <Text display={'inline'} color={useColorModeValue('blue.700', 'white')}>{jadwal.tanggal}</Text>
-      <button style={{ margin: '0 10px' }} onClick={() => { getNextDate() }}><ArrowRightIcon color={useColorModeValue('blue.700', 'white')} /></button>
+      <button style={{ margin: '0 10px' }} onClick={() => { getPreviousDate() }}><ArrowLeftIcon fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')} /></button>
+      <Text display={'inline'} fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')}>{jadwal.tanggal}</Text>
+      <button style={{ margin: '0 10px' }} onClick={() => { getNextDate() }}><ArrowRightIcon fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')} /></button>
       <SimpleGrid columns={3} p='1.5' spacing='5px' border={1}>
         <Box shadow={'base'} bg={useColorModeValue('white', 'gray.300')} borderRadius={'md'}>
           <Text color={'black'} fontWeight='bold'>Imsak</Text>

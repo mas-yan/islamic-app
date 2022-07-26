@@ -18,8 +18,8 @@ import { useEffect, useState } from 'react';
 import './style.css';
 import Select from 'react-select'
 
-const fromLocal = JSON.parse(localStorage.getItem('kota') || JSON.stringify({ value: '1301', label: 'KOTA JAKARTA' }));
 function Jadwal() {
+  const fromLocal = JSON.parse(localStorage.getItem('kota') || JSON.stringify({ value: '1301', label: 'KOTA JAKARTA' }));
   const [jadwal, setJadwal] = useState([])
   const [lokasi, setLokasi] = useState();
   const [kota, setKota] = useState(fromLocal)

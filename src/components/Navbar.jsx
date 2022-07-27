@@ -1,4 +1,4 @@
-import { Link as Href, useResolvedPath } from 'react-router-dom';
+import { NavLink, useResolvedPath } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -51,7 +51,7 @@ function Navbar() {
           onClick={isOpen ? onClose : onOpen}
         />
         <Link
-          as={Href}
+          as={NavLink}
           to={'/'}
           style={{ textDecoration: 'none' }}
         >
@@ -68,7 +68,7 @@ function Navbar() {
           {Links.map((link, index) => (
             <Link
               key={index}
-              as={Href}
+              as={NavLink}
               px={2}
               py={1}
               rounded={'md'}
@@ -77,8 +77,7 @@ function Navbar() {
                 bg: 'gray.500',
                 color: 'white',
               }}
-              bg={useColorModeValue(resolved.pathname === link.link ? 'gray.700' : 'white', resolved.pathname === link.link ? 'white' : 'gray.800')}
-              color={useColorModeValue(resolved.pathname === link.link ? 'white' : 'gray.700', resolved.pathname === link.link ? 'gray.700' : 'white')}
+              _activeLink={{ bg: useColorModeValue('gray.700', 'white'), color: useColorModeValue('white', 'gray.700') }}
               to={link.link}
             >
               {link.name}
@@ -98,7 +97,7 @@ function Navbar() {
             {Links.map((link) => (
               <Link
                 key={link.link}
-                as={Href}
+                as={NavLink}
                 px={2}
                 py={1}
                 rounded={'md'}
@@ -108,9 +107,7 @@ function Navbar() {
                   bg: 'gray.500',
                   color: 'white',
                 }}
-                bg={`${path === link.link ? 'gray.700' : 'white'}`}
-                _dark={{ bg: `${path === link.link ? 'white' : 'gray.800'}`, color: `${path === link.link ? 'gray.700' : 'white'}` }}
-                color={`${path === link.link ? 'white' : 'gray.700'}`}
+                _activeLink={{ bg: useColorModeValue('gray.700', 'white'), color: useColorModeValue('white', 'gray.700') }}
                 to={link.link}
               >
                 {link.name}

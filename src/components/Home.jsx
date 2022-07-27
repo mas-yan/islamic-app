@@ -13,8 +13,9 @@ import {
   SimpleGrid,
   Container
 } from '@chakra-ui/react';
+
 import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon } from '@chakra-ui/icons';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './style.css';
 import Select from 'react-select'
 
@@ -26,6 +27,7 @@ function Jadwal() {
   const [day, setDay] = useState()
   const [select, setSelect] = useState()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const initialRef = useRef(null)
 
   const getLokasi = async () => {
     const response = await fetch(
@@ -92,10 +94,10 @@ function Jadwal() {
 
   return (
     <Box className="widget-header" textAlign={'center'} position={'absolute'} bottom='0' bg={useColorModeValue('gray.100', 'gray.600')} color='black'>
-      <Heading mt={2} fontSize={{ base: 'xs', md: 'xl' }}>
+      <Heading mt={2} fontSize={{ base: 'sm', md: 'xl' }}>
         <Text display={'inline'} color={useColorModeValue('blue.700', 'white')} fontWeight='bold'>Waktu Sholat Daerah {kota.label}</Text>
         <button onClick={onOpen}><TriangleDownIcon color={useColorModeValue('blue.700', 'white')} pb={{ base: 1, md: 2 }} pl='1' w={{ base: 5, md: 6 }} h={{ base: 5, md: 6 }} /></button>
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Ubah Lokasi Anda</ModalHeader>
@@ -103,6 +105,7 @@ function Jadwal() {
             <ModalBody color={'black'}>
               <div>
                 <Select
+                  ref={initialRef}
                   options={lokasi}
                   onChange={(e) => {
                     changeLocation(e)

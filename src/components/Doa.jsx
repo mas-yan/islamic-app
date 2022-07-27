@@ -33,12 +33,6 @@ function Doa() {
     setIsNext(true)
   }
 
-  function getMoreDoa() {
-    // setTimeout(() => {
-    getDoa();
-    // }, 1);
-  }
-
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -50,7 +44,7 @@ function Doa() {
 
   useEffect(() => {
     if (!isNext) return;
-    getMoreDoa();
+    getDoa();
   }, [isNext]);
   // end get all
 
@@ -82,7 +76,7 @@ function Doa() {
 
   return (
     <Container maxW='container.xl' my={'30px'}>
-      <SimpleGrid columns={{ base: '1', md: '4' }} spacingX='40px' spacingY='20px'>
+      <SimpleGrid columns={{ base: '1', md: '3', lg: '4' }} spacingX='40px' spacingY='20px'>
         {doa.map((item, index) => (
           <Box key={index} p={5} shadow='md' borderWidth='1px' rounded={'md'} onClick={() => detailDoa(item.id)} cursor="pointer">
             <Heading fontSize='xl' justifyContent={'center'}>

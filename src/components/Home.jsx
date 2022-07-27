@@ -11,7 +11,9 @@ import {
   Text,
   useColorModeValue,
   SimpleGrid,
-  Container
+  Container,
+  Skeleton,
+  Center
 } from '@chakra-ui/react';
 
 import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon } from '@chakra-ui/icons';
@@ -95,8 +97,7 @@ function Jadwal() {
   return (
     <Box className="widget-header" textAlign={'center'} position={'absolute'} bottom='0' bg={useColorModeValue('gray.100', 'gray.600')} color='black'>
       <Heading mt={2} fontSize={{ base: 'sm', md: 'xl' }}>
-        <Text display={'inline'} color={useColorModeValue('blue.700', 'white')} fontWeight='bold'>Waktu Sholat Daerah {kota.label}</Text>
-        <button onClick={onOpen}><TriangleDownIcon color={useColorModeValue('blue.700', 'white')} pb={{ base: 1, md: 2 }} pl='1' w={{ base: 5, md: 6 }} h={{ base: 5, md: 6 }} /></button>
+        <Text display={'inline'} color={useColorModeValue('blue.700', 'white')} fontWeight='bold'>Waktu Sholat Daerah <span onClick={onOpen} style={{ cursor: 'pointer' }}> {kota.label}<TriangleDownIcon color={useColorModeValue('blue.700', 'white')} pb={{ base: 1, md: 2 }} w={{ base: 5, md: 6 }} h={{ base: 5, md: 6 }} /></span></Text>
         <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
           <ModalOverlay />
           <ModalContent>
@@ -105,6 +106,7 @@ function Jadwal() {
             <ModalBody color={'black'}>
               <div>
                 <Select
+                  placeholder='Cari Lokasi Anda ...'
                   ref={initialRef}
                   options={lokasi}
                   onChange={(e) => {
@@ -117,43 +119,49 @@ function Jadwal() {
         </Modal>
       </Heading>
       <button style={{ margin: '0 10px' }} onClick={() => { getPreviousDate() }}><ArrowLeftIcon fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')} /></button>
-      <Text display={'inline'} fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')}>{jadwal.tanggal}</Text>
+      <Text display={'inline'} fontWeight='bold' fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')}>{jadwal.tanggal}</Text>{jadwal.length === 0 && <Skeleton height='5' w='130px' display={'inline-block'} mb='-2' />}
       <button style={{ margin: '0 10px' }} onClick={() => { getNextDate() }}><ArrowRightIcon fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')} /></button>
       <SimpleGrid columns={3} p='1.5' spacing='5px' border={1}>
         <Box shadow={'base'} bg={useColorModeValue('white', 'gray.300')} borderRadius={'md'}>
           <Text color={'black'} fontWeight='bold'>Imsak</Text>
           <Heading fontSize={'2xl'}>
             <Text color={'blue.700'} fontWeight='bold'>{jadwal.imsak}</Text>
+            {jadwal.length === 0 && <Skeleton mb='2' mx='auto' w='20' height='5' />}
           </Heading>
         </Box>
         <Box shadow={'base'} bg={useColorModeValue('white', 'gray.300')} borderRadius={'md'}>
           <Text color={'black'} fontWeight='bold'>Subuh</Text>
           <Heading fontSize={'2xl'}>
             <Text color={'blue.700'} fontWeight='bold'>{jadwal.subuh}</Text>
+            {jadwal.length === 0 && <Skeleton mb='2' mx='auto' w='20' height='5' />}
           </Heading>
         </Box>
         <Box shadow={'base'} bg={useColorModeValue('white', 'gray.300')} borderRadius={'md'}>
           <Text color={'black'} fontWeight='bold'>Dzuhur</Text>
           <Heading fontSize={'2xl'}>
             <Text color={'blue.700'} fontWeight='bold'>{jadwal.dzuhur}</Text>
+            {jadwal.length === 0 && <Skeleton mb='2' mx='auto' w='20' height='5' />}
           </Heading>
         </Box>
         <Box shadow={'base'} bg={useColorModeValue('white', 'gray.300')} borderRadius={'md'}>
           <Text color={'black'} fontWeight='bold'>Ashar</Text>
           <Heading fontSize={'2xl'}>
             <Text color={'blue.700'} fontWeight='bold'>{jadwal.ashar}</Text>
+            {jadwal.length === 0 && <Skeleton mb='2' mx='auto' w='20' height='5' />}
           </Heading>
         </Box>
         <Box shadow={'base'} bg={useColorModeValue('white', 'gray.300')} borderRadius={'md'}>
           <Text color={'black'} fontWeight='bold'>Maghrib</Text>
           <Heading fontSize={'2xl'}>
             <Text color={'blue.700'} fontWeight='bold'>{jadwal.maghrib}</Text>
+            {jadwal.length === 0 && <Skeleton mb='2' mx='auto' w='20' height='5' />}
           </Heading>
         </Box>
         <Box shadow={'base'} bg={useColorModeValue('white', 'gray.300')} borderRadius={'md'}>
           <Text color={'black'} fontWeight='bold'>Isya</Text>
           <Heading fontSize={'2xl'}>
             <Text color={'blue.700'} fontWeight='bold'>{jadwal.isya}</Text>
+            {jadwal.length === 0 && <Skeleton mb='2' mx='auto' w='20' height='5' />}
           </Heading>
         </Box>
       </SimpleGrid>

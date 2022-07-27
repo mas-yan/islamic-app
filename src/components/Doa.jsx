@@ -98,7 +98,7 @@ function Doa() {
         </Center>
       }
       {end && <Text mt='20px' textAlign={'center'}>Anda telah berada di akhir halaman</Text>}
-      <Modal useInert={false} isCentered isOpen={isOpen} size="2xl" onClose={onClose} scrollBehavior='outside'>
+      <Modal useInert={false} isCentered isOpen={isOpen} size="2xl" onClose={onClose} scrollBehavior='inside'>
         {overlay}
         <ModalContent>
           <ModalHeader mr={'5px'} textAlign='center'>{detail.nama}</ModalHeader>

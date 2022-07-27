@@ -1,5 +1,5 @@
 import {
-  Box, SimpleGrid, Text, useColorModeValue, Heading, Grid, GridItem, Container
+  Box, SimpleGrid, Text, useColorModeValue, SkeletonText, Heading, Grid, GridItem, Container
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -39,9 +39,17 @@ function Detail() {
 
   return (
     <div>
-      {loading && <div>Loading...</div>}
-      {status ? (
-        <Container maxW={'1000px'}>
+      <Container maxW={'1000px'}>
+        {loading && (
+          <SimpleGrid my='20' columns={1} spacingX='40px' spacingY='20px'>
+            {[...Array(20)].map((x, i) =>
+              <Box p={5} shadow='md' key={i} borderWidth='1px' rounded={'md'}>
+                <SkeletonText mt='4' noOfLines={4} spacing='4' />
+              </Box>
+            )}
+          </SimpleGrid>
+        )}
+        {status ? (
           <SimpleGrid my='20' columns={1} spacingX='40px' spacingY='20px'>
             {surah.map((item, index) => (
               <Box key={index} p={5} shadow='md' borderWidth='1px' rounded={'md'}>
@@ -53,10 +61,10 @@ function Detail() {
                     </Box>
                   </GridItem>
                   <GridItem colStart={2} colEnd={6}>
-                    <Text fontWeight={'bold'} fontSize={{ lg: '3xl', base: '2xl' }} textAlign={'right'}>{item.ar}</Text>
+                    <Text fontWeight={'bold'} letterSpacing='1px' fontSize={{ lg: '3xl', base: '2xl' }} textAlign={'right'}>{item.ar}</Text>
                   </GridItem>
                 </Grid>
-                <Text textAlign={'right'} dangerouslySetInnerHTML={{ __html: item.tr }}></Text>
+                <Text textAlign={{ base: 'left' }} mt='3' dangerouslySetInnerHTML={{ __html: item.tr }}></Text>
                 <Heading mt='3' fontSize={'l'}>
                   <Text color={'blue.400'}>Arti :</Text>
                 </Heading>
@@ -64,13 +72,13 @@ function Detail() {
               </Box>
             ))}
           </SimpleGrid>
-        </Container >
-      ) : (
-        <div>
-          <h1>404</h1>
-        </div>
-      )
-      }
+        ) : (
+          <div>
+            <h1>404</h1>
+          </div>
+        )
+        }
+      </Container>
     </div >
   )
 }

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Box, Link, Text, Container, SimpleGrid, SkeletonText, HStack, Spacer, useColorModeValue } from '@chakra-ui/react'
 import { Link as Href } from 'react-router-dom';
+import Ayat from "../../assets/ayat.png";
+import Ayat1 from "../../assets/ayat1.png";
 
 function Alquran() {
   const [loading, setLoading] = useState(true);
   const [quran, setQuran] = useState([]);
 
-  const bg = useColorModeValue('url("/src/assets/ayat.png")', 'url("/src/assets/ayat1.png")')
+  const bg = useColorModeValue(`url(${Ayat})`, `url(${Ayat1})`)
   const color = useColorModeValue('black', 'white');
 
   const fetchQuran = async () => {
@@ -21,13 +23,10 @@ function Alquran() {
 
   const mySyle = {
     backgroundImage: bg,
-    // backgroundColor: '#cccccc',
     color: color,
     backgroundPosition: 'center',
-    // backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     textAlign: 'center',
-    // position: 'relative',
   }
 
 
@@ -57,7 +56,6 @@ function Alquran() {
                     <Box display={'block'}>
                       <Text fontWeight={'bold'} fontSize='xl' textAlign={'right'}>{item.nama}</Text>
                     </Box>
-                    {/* <Text fontWeight={'bold'} fontSize='xl'>{item.nama}</Text> */}
                   </HStack>
                 </Box>
               </Box>

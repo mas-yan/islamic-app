@@ -1,13 +1,10 @@
 import {
-  Box, SimpleGrid, Text, useColorModeValue, Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  Heading,
-  AccordionIcon, Grid, GridItem, Container
+  Box, SimpleGrid, Text, useColorModeValue, Heading, Grid, GridItem, Container
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Ayat from "../../assets/ayat.png";
+import Ayat1 from "../../assets/ayat1.png";
 
 function Detail() {
   const params = useParams()
@@ -30,14 +27,12 @@ function Detail() {
   }, [])
 
 
-  const bg = useColorModeValue('url("/src/assets/ayat.png")', 'url("/src/assets/ayat1.png")')
+  const bg = useColorModeValue(`url(${Ayat})`, `url(${Ayat1})`)
   const color = useColorModeValue('black', 'white');
   const mySyle = {
     backgroundImage: bg,
-    // backgroundColor: '#cccccc',
     color: color,
     backgroundPosition: 'center',
-    // backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     textAlign: 'center',
   }

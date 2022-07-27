@@ -7,3 +7,4 @@ http://api.aladhan.com/v1/calendarByCity?city=kendal&country=Indonesia&method=2&
 
 sun
 <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Smashicons - Flaticon</a>
+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

@@ -5,19 +5,47 @@ import Alquran from "./components/quran/Alquran";
 import Detail from "./components/quran/Detail";
 import Doa from "./components/Doa";
 import Tahlil from "./components/Tahlil";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useColorModeValue } from "@chakra-ui/react";
+import { ArrowUpIcon } from '@chakra-ui/icons'
+import './assets/style.css';
 function App() {
   const { pathname } = useLocation();
+
+  const [visible, setVisible] = useState(false)
+
+  const toggleVisible = () => {
+    const scrolled = document.documentElement.scrollTop;
+    if (scrolled > 300) {
+      setVisible(true)
+    }
+    else if (scrolled <= 300) {
+      setVisible(false)
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: 'smooth'
     });
+
+    window.addEventListener('scroll', toggleVisible);
   }, [pathname]);
   return (
     <div>
       <Navbar />
+      <div className="top-to-btm" onClick={scrollToTop}>
+        <ArrowUpIcon bg={useColorModeValue('gray.700', 'gray.300')} borderColor='black' color={useColorModeValue('white', 'black')} className="icon-position icon-style" h='8' w='8' style={{ display: visible ? 'inline' : 'none' }} />
+      </div>
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/quran' element={<Alquran />}></Route>

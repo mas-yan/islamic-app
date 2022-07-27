@@ -1,4 +1,11 @@
-import { Box, SimpleGrid, Text, useColorModeValue, Spacer, Grid, GridItem } from "@chakra-ui/react";
+import {
+  Box, SimpleGrid, Text, useColorModeValue, Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  Heading,
+  AccordionIcon, Grid, GridItem, Container
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -39,8 +46,8 @@ function Detail() {
     <div>
       {loading && <div>Loading...</div>}
       {status ? (
-        <div>
-          <SimpleGrid mx={5} my='20' columns={1} spacingX='40px' spacingY='20px'>
+        <Container maxW={'1000px'}>
+          <SimpleGrid my='20' columns={1} spacingX='40px' spacingY='20px'>
             {surah.map((item, index) => (
               <Box key={index} p={5} shadow='md' borderWidth='1px' rounded={'md'}>
                 <Grid templateColumns='repeat(5, 1fr)' gap={1}>
@@ -51,14 +58,18 @@ function Detail() {
                     </Box>
                   </GridItem>
                   <GridItem colStart={2} colEnd={6}>
-                    <Text fontWeight={'bold'} fontSize={{ lg: '2xl', base: 'xl' }} textAlign={'right'}>{item.ar}</Text>
+                    <Text fontWeight={'bold'} fontSize={{ lg: '3xl', base: '2xl' }} textAlign={'right'}>{item.ar}</Text>
                   </GridItem>
                 </Grid>
-                <Text fontSize='md' mt='3'>{item.idn}</Text>
+                <Text textAlign={'right'} dangerouslySetInnerHTML={{ __html: item.tr }}></Text>
+                <Heading mt='3' fontSize={'l'}>
+                  <Text color={'blue.400'}>Arti :</Text>
+                </Heading>
+                {item.idn}
               </Box>
             ))}
           </SimpleGrid>
-        </div >
+        </Container >
       ) : (
         <div>
           <h1>404</h1>

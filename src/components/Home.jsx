@@ -16,7 +16,7 @@ import {
 
 import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon } from '@chakra-ui/icons';
 import { useEffect, useRef, useState } from 'react';
-import './style.css';
+import './../assets/style.css';
 import Select from 'react-select'
 
 function Jadwal() {

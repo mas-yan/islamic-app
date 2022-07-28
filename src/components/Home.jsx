@@ -13,7 +13,6 @@ import {
   SimpleGrid,
   Container,
   Skeleton,
-  Center
 } from '@chakra-ui/react';
 
 import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon } from '@chakra-ui/icons';

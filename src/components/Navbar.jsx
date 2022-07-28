@@ -33,6 +33,10 @@ const Links = [
     name: 'Tahlil',
     link: '/tahlil',
   },
+  {
+    name: 'Asmaul Husna',
+    link: '/asmaulhusna',
+  },
 ]
 
 function Navbar() {
@@ -63,7 +67,7 @@ function Navbar() {
         <HStack
           as={'nav'}
           mr={{ md: '50', lg: '150px' }}
-          spacing={8}
+          spacing={2}
           display={{ base: 'none', md: 'flex' }}>
           {Links.map((link, index) => (
             <Link

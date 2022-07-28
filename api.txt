@@ -4,7 +4,9 @@ quran
 <a target="_blank" href="https://icons8.com/icon/CmsNPHks3Lix/quran">Quran</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 http://api.aladhan.com/v1/calendarByCity?city=kendal&country=Indonesia&method=2&month=07&year=2022
+https://www.kindpng.com/imgv/bmwhR_representation-symbol-figure-art-islamic-geometric-border-islamic/
 
-sun
-<a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Smashicons - Flaticon</a>
-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
+https://islamic-api-zhirrr.vercel.app/api/asmaulhusna
+https://www.pngegg.com/en/png-zdrzy
+
+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

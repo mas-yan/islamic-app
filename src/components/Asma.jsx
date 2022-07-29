@@ -9,8 +9,9 @@ function Asma() {
     const response = await fetch('https://islamic-api-zhirrr.vercel.app/api/asmaulhusna')
     const data = await response.json()
     setData(data.data)
-    console.log(data);
   }
+
+  const image = useColorModeValue(gambar, gambar1)
 
   useEffect(() => {
     fetchData()
@@ -21,7 +22,7 @@ function Asma() {
         {data.map((item, i) =>
           <Box width={{ lg: '300px', base: '100%' }} key={i} position='relative'
             height={{ lg: '300px', base: '100%' }}>
-            <Image src={useColorModeValue(gambar, gambar1)} w='100%'></Image>
+            <Image src={image} w='100%'></Image>
             <Box position='absolute' top={{ base: '40px', lg: '70px' }} maxW={'100%'} w='100%' textAlign='center'>
               <Tooltip textAlign={'center'} label={item.arabic} hasArrow fontWeight={'bold'} fontSize={'30'}>
                 <Text noOfLines='1' ml={{ base: '45px', lg: 0 }} fontWeight={'bold'} fontSize={{ base: '20px', lg: '30px' }} cursor='pointer' maxW={{ base: '50%', lg: '100%' }} mt={{ lg: 0, base: 1 }}>{item.arabic}</Text>

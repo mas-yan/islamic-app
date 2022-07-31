@@ -1,16 +1,21 @@
 import {
-  Box, SimpleGrid, Text, useColorModeValue, SkeletonText, Heading, Grid, GridItem, Container
+  Box, SimpleGrid, Text, Link, Image, Accordion, AccordionItem, AccordionPanel, AccordionIcon, AccordionButton, Button, useColorModeValue, SkeletonText, Heading, Grid, GridItem, Container, Icon
 } from "@chakra-ui/react";
+import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link as Href, useParams } from "react-router-dom";
 import Ayat from "../../assets/ayat.png";
 import Ayat1 from "../../assets/ayat1.png";
+import HeadSurah1 from "../../assets/surah.png";
 
 function Detail() {
   const params = useParams()
   const [surah, setSurah] = useState([])
+  const [detail, setDetail] = useState({})
   const [loading, setLoading] = useState(true)
   const [status, setStatus] = useState(true)
+  const [playing, setPlaying] = useState(false);
+  const [audio, setAudio] = useState(new Audio());
 
   const getSurah = async () => {
     const response = await fetch(`https://quran-api.santrikoding.com/api/surah/${params.id}`)
@@ -18,13 +23,33 @@ function Detail() {
     setLoading(false)
     if (data.status === true) {
       setSurah(data.ayat)
+      setDetail(data)
+      setAudio(new Audio(data.audio));
     } else {
       setStatus(false)
     }
   }
+
+  const toggle = () => setPlaying(!playing);
+
   useEffect(() => {
+    !playing ? audio.pause() : audio.play()
+  },
+    [playing]
+  );
+
+  useEffect(() => {
+    setPlaying(false)
+    setLoading(true)
     getSurah()
-  }, [])
+  }, [params.id])
+
+  useEffect(() => {
+    audio.addEventListener('ended', () => setPlaying(false));
+    return () => {
+      audio.removeEventListener('ended', () => setPlaying(false));
+    };
+  }, []);
 
 
   const bg = useColorModeValue(`url(${Ayat})`, `url(${Ayat1})`)
@@ -39,20 +64,107 @@ function Detail() {
 
   return (
     <div>
-      <Container maxW={'1000px'}>
-        {loading && (
-          <SimpleGrid my='20' columns={1} spacingX='40px' spacingY='20px'>
-            {[...Array(20)].map((x, i) =>
-              <Box p={5} shadow='md' key={i} borderWidth='1px' rounded={'md'}>
-                <SkeletonText mt='4' noOfLines={4} spacing='4' />
-              </Box>
-            )}
-          </SimpleGrid>
-        )}
+      <Container mb={5} mt='1' maxW={'1000px'}>
         {status ? (
-          <SimpleGrid my='20' columns={1} spacingX='40px' spacingY='20px'>
+          <SimpleGrid columns={1} spacingX='40px' spacingY='20px'>
+            {loading ? (
+              <SimpleGrid columns={1} spacingX='40px' spacingY='20px'>
+                {[...Array(20)].map((x, i) =>
+                  <Box p={5} shadow='md' key={i} borderWidth='1px' rounded={'md'}>
+                    <SkeletonText mt='4' noOfLines={4} spacing='4' />
+                  </Box>
+                )}
+              </SimpleGrid>
+            ) :
+              <div>
+                <Box position={'relative'}>
+                  <Image src={HeadSurah1}></Image>
+                  <Box maxW={'100%'} w='100%' textAlign='center'>
+                    <Box position={'absolute'} maxW={'100%'} w='100%' textAlign='center'>
+                      <Text noOfLines='1' ml={{ base: '-72%', md: '-36%' }} fontWeight={'bold'} fontSize={{ base: '11px', md: '25px', lg: '25px' }} maxW={{ base: '50 % ', md: '100% ' }} mt={{ md: 4, base: '2%' }}>{detail.tempat_turun}</Text>
+                    </Box>
+                    <Text noOfLines='1' ml={{ base: '25%', md: 0 }} fontWeight={'bold'} fontSize={{ base: '15px', md: '30px' }} maxW={{ base: '50%', md: '100%' }} mt={{ md: '-10.5%', lg: '-9.5%', base: -9 }}>{detail.nama}</Text>
+                    <Text noOfLines='1' ml={{ base: '25%', md: 0 }} fontWeight={'bold'} fontSize={{ base: '10px', md: '25px', lg: '25px' }} maxW={{ base: '50%', md: '100%' }} mt={{ md: -1, base: -1.5 }}>{detail.nama_latin}</Text>
+                    <Box position={'absolute'} maxW={'100%'} w='100%' textAlign='center'>
+                      <Text noOfLines='1' ml={{ base: '72%', md: '72%' }} fontWeight={'bold'} fontSize={{ base: '11px', md: '25px', lg: '25px' }} maxW={{ base: '50 % ', md: '100% ' }} mt={{ md: '-8%', lg: '-16', base: '-6.5%' }}>{detail.jumlah_ayat} Ayat</Text>
+                    </Box>
+                  </Box>
+                </Box>
+                <Accordion allowToggle borderColor={'blue.400'} shadow='md' borderWidth='2px' mt={{ lg: '10', base: 9 }} rounded={'md'}>
+                  <AccordionItem>
+                    <h2>
+                      <AccordionButton>
+                        <Box flex='1' textAlign='left'>
+                          <Heading fontSize={'l'}>
+                            <Text display={'inline-block'} >Deskripsi Surat {detail.nama_latin}</Text>
+                            <AccordionIcon />
+                          </Heading>
+                        </Box>
+                      </AccordionButton>
+                    </h2>
+                    <AccordionPanel pb={4}>
+                      <Heading fontSize={'l'}>
+                        <Text color={'blue.400'}>Surat:</Text>
+                      </Heading>
+                      <Text mb={3}>{detail.nama} - {detail.nama_latin} ({detail.arti})</Text>
+                      <Heading fontSize={'l'}>
+                        <Text color={'blue.400'}>Keterangan</Text>
+                      </Heading>
+                      <Text mb={3} dangerouslySetInnerHTML={{ __html: detail.deskripsi }}></Text>
+                    </AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+                <Grid mt='2' templateColumns='repeat(3, 1fr)' gap={6}>
+                  <GridItem w='100%'>
+                    {detail.surat_sebelumnya ?
+                      <Link
+                        as={Href}
+                        to={`/quran/${detail.surat_sebelumnya.nomor}`}
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Button variant='outline' colorScheme='blue' p='3' mt='5' borderColor={'blue.400'} shadow='md' w='100%' borderWidth='2px' rounded={'md'}>
+                          <ArrowBackIcon />
+                          <Text display={{ base: 'none', lg: 'inline-block' }} ml='3'>Surat Selanjutnya {detail.surat_sebelumnya.nama_latin}</Text>
+                        </Button>
+                      </Link>
+                      : ''
+                    }
+                  </GridItem>
+                  <GridItem w='100%'>
+                    <Button colorScheme='blue' onClick={toggle} p='3' mt='5' borderColor={'blue.400'} shadow='md' w='100%' borderWidth='2px' rounded={'md'}>
+                      <Heading fontSize={'l'} textAlign='center'>
+                        {playing ?
+                          <Icon viewBox="0 0 320 512" mb='1' ><path fill='currentColor' d="M272 63.1l-32 0c-26.51 0-48 21.49-48 47.1v288c0 26.51 21.49 48 48 48L272 448c26.51 0 48-21.49 48-48v-288C320 85.49 298.5 63.1 272 63.1zM80 63.1l-32 0c-26.51 0-48 21.49-48 48v288C0 426.5 21.49 448 48 448l32 0c26.51 0 48-21.49 48-48v-288C128 85.49 106.5 63.1 80 63.1z" />
+                          </Icon>
+                          :
+                          <Icon viewBox="0 0 384 512" mb='1' ><path fill='currentColor' d="M361 215C375.3 223.8 384 239.3 384 256C384 272.7 375.3 288.2 361 296.1L73.03 472.1C58.21 482 39.66 482.4 24.52 473.9C9.377 465.4 0 449.4 0 432V80C0 62.64 9.377 46.63 24.52 38.13C39.66 29.64 58.21 29.99 73.03 39.04L361 215z" />
+                          </Icon>
+                        }
+                        <Text display={'inline-block'} ml='2'>{playing ? "Stop" : "Play"} Audio</Text>
+                      </Heading>
+                    </Button>
+                  </GridItem>
+                  <GridItem w='100%'>
+                    {detail.surat_selanjutnya ?
+                      <Link
+                        as={Href}
+                        to={`/quran/${detail.surat_selanjutnya.nomor}`}
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Button variant='outline' colorScheme='blue' p='3' mt='5' borderColor={'blue.400'} shadow='md' w='100%' borderWidth='2px' rounded={'md'}>
+                          <ArrowForwardIcon />
+                          <Text display={{ base: 'none', lg: 'inline-block' }} ml='3'>Surat Selanjutnya {detail.surat_selanjutnya.nama_latin}</Text>
+                        </Button>
+                      </Link>
+                      :
+                      ''
+                    }
+                  </GridItem>
+                </Grid>
+              </div>
+            }
             {surah.map((item, index) => (
-              <Box key={index} p={5} shadow='md' borderWidth='1px' rounded={'md'}>
+              <Box key={index} p={5} borderColor={'blue.400'} shadow='md' borderWidth='1px' rounded={'md'}>
                 <Grid templateColumns='repeat(5, 1fr)' gap={1}>
                   <GridItem >
                     <Box width={'45px'}

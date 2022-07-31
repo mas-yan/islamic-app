@@ -61,7 +61,7 @@ function Navbar() {
         >
           <HStack alignItems={'center'}>
             <img src={Logo} alt="Qur'an Digital" />
-            <Text fontSize='2xl'>Islamic App</Text>
+            <Text color={useColorModeValue('blue.600', 'white')} fontSize='2xl'>Ruang Islam</Text>
           </HStack>
         </Link>
         <HStack
@@ -78,10 +78,10 @@ function Navbar() {
               rounded={'md'}
               _hover={{
                 textDecoration: 'none',
-                bg: 'gray.500',
+                bg: 'blue.500',
                 color: 'white',
               }}
-              _activeLink={{ bg: useColorModeValue('gray.700', 'white'), color: useColorModeValue('white', 'gray.700') }}
+              _activeLink={{ bg: useColorModeValue('blue.600', 'white'), color: useColorModeValue('white', 'blue.600') }}
               to={link.link}
             >
               {link.name}
@@ -108,10 +108,10 @@ function Navbar() {
                 onClick={onClose}
                 _hover={{
                   textDecoration: 'none',
-                  bg: 'gray.500',
+                  bg: 'blue.500',
                   color: 'white',
                 }}
-                _activeLink={{ bg: useColorModeValue('gray.700', 'white'), color: useColorModeValue('white', 'gray.700') }}
+                _activeLink={{ bg: useColorModeValue('blue.600', 'white'), color: useColorModeValue('white', 'blue.600') }}
                 to={link.link}
               >
                 {link.name}

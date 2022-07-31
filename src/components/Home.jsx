@@ -174,7 +174,7 @@ function Home() {
       <div className="header">
         <Box color={'white'} pt={{ base: '30', md: '50px' }} pb='120px' bg={useColorModeValue('gray.700', '')} width="100%">
           <Heading textAlign={'center'}>
-            <Text>Islamic App</Text>
+            <Text>Ruang Islam</Text>
           </Heading>
           <Text textAlign={'center'}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, impedit!

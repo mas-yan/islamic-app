@@ -97,7 +97,7 @@ function Detail() {
                     <h2>
                       <AccordionButton>
                         <Box flex='1' textAlign='left'>
-                          <Heading fontSize={'l'}>
+                          <Heading fontSize={{ base: 'l', md: 'xl' }} textAlign='center'>
                             <Text display={'inline-block'} >Deskripsi Surat {detail.nama_latin}</Text>
                             <AccordionIcon />
                           </Heading>
@@ -109,6 +109,14 @@ function Detail() {
                         <Text color={'blue.400'}>Surat:</Text>
                       </Heading>
                       <Text mb={3}>{detail.nama} - {detail.nama_latin} ({detail.arti})</Text>
+                      <Heading fontSize={'l'}>
+                        <Text color={'blue.400'}>Jumlah Ayat:</Text>
+                      </Heading>
+                      <Text mb={3}>{detail.jumlah_ayat} Ayat</Text>
+                      <Heading fontSize={'l'}>
+                        <Text color={'blue.400'}>Tempat Turun:</Text>
+                      </Heading>
+                      <Text mb={3}>{detail.tempat_turun}</Text>
                       <Heading fontSize={'l'}>
                         <Text color={'blue.400'}>Keterangan</Text>
                       </Heading>
@@ -126,7 +134,7 @@ function Detail() {
                       >
                         <Button variant='outline' colorScheme='blue' p='3' mt='5' borderColor={'blue.400'} shadow='md' w='100%' borderWidth='2px' rounded={'md'}>
                           <ArrowBackIcon />
-                          <Text display={{ base: 'none', lg: 'inline-block' }} ml='3'>Surat Selanjutnya {detail.surat_sebelumnya.nama_latin}</Text>
+                          <Text display={{ base: 'none', lg: 'inline-block' }} ml='3'>Surat Sebelumnya {detail.surat_sebelumnya.nama_latin}</Text>
                         </Button>
                       </Link>
                       : ''

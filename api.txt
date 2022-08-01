@@ -10,3 +10,5 @@ https://islamic-api-zhirrr.vercel.app/api/asmaulhusna
 https://www.pngegg.com/en/png-zdrzy
 
 <a href='https://pngtree.com/so/headdress'>headdress png from pngtree.com/</a>
+
+https://github.com/rzkytmgr/quran-api

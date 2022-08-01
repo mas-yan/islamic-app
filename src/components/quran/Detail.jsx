@@ -2,7 +2,7 @@ import {
   Box, SimpleGrid, Text, Link, Image, Accordion, AccordionItem, AccordionPanel, AccordionIcon, AccordionButton, Button, useColorModeValue, SkeletonText, Heading, Grid, GridItem, Container, Icon
 } from "@chakra-ui/react";
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link as Href, useParams } from "react-router-dom";
 import Ayat from "../../assets/ayat.png";
 import Ayat1 from "../../assets/ayat1.png";
@@ -16,6 +16,7 @@ function Detail() {
   const [status, setStatus] = useState(true)
   const [playing, setPlaying] = useState(false);
   const [audio, setAudio] = useState(new Audio());
+  let audios = useRef();
 
   const getSurah = async () => {
     const response = await fetch(`https://quran-api.santrikoding.com/api/surah/${params.id}`)
@@ -32,11 +33,6 @@ function Detail() {
 
   const toggle = () => setPlaying(!playing);
 
-  useEffect(() => {
-    !playing ? audio.pause() : audio.play()
-  },
-    [playing]
-  );
 
   useEffect(() => {
     setPlaying(false)
@@ -45,11 +41,17 @@ function Detail() {
   }, [params.id])
 
   useEffect(() => {
-    audio.addEventListener('ended', () => setPlaying(false));
+    audios.current = audio
+    !playing ? audios.current.pause() : audios.current.play()
+  },
+    [playing]
+  );
+
+  useEffect(() => {
     return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
-    };
-  }, []);
+      audios.current.pause()
+    }
+  }, [])
 
 
   const bg = useColorModeValue(`url(${Ayat})`, `url(${Ayat1})`)

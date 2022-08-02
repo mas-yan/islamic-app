@@ -19,16 +19,26 @@ function Detail() {
   let audios = useRef();
 
   const getSurah = async () => {
-    const response = await fetch(`https://quran-api.santrikoding.com/api/surah/${params.id}`)
-    const data = await response.json()
-    setLoading(false)
-    if (data.status === true) {
-      setSurah(data.ayat)
-      setDetail(data)
-      setAudio(new Audio(data.audio));
-    } else {
-      setStatus(false)
+    try {
+      let [first, second] = await Promise.all([
+        fetch(`https://quran-api.santrikoding.com/api/surah/${params.id}`),
+        fetch(`https://api.npoint.io/99c279bb173a6e28359c/surat/${params.id}`)
+      ]);
+      const resultFirst = await first.json()
+      const resultSecond = await second.json()
+      setLoading(false)
+      if (resultFirst.status === true && resultSecond.length > 0) {
+        setSurah(resultSecond)
+        setDetail(resultFirst)
+        setAudio(new Audio(resultFirst.audio));
+      } else {
+        setStatus(false)
+      }
     }
+    catch (err) {
+      setStatus(false)
+      console.log(err);
+    };
   }
 
   const toggle = () => setPlaying(!playing);
@@ -190,9 +200,56 @@ function Detail() {
                 <Heading mt='3' fontSize={'l'}>
                   <Text color={'blue.400'}>Arti :</Text>
                 </Heading>
-                {item.idn}
+                {item.id}
               </Box>
             ))}
+            <Grid mt='2' templateColumns='repeat(3, 1fr)' gap={6}>
+              <GridItem w='100%'>
+                {detail.surat_sebelumnya ?
+                  <Link
+                    as={Href}
+                    to={`/quran/${detail.surat_sebelumnya.nomor}`}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <Button variant='outline' colorScheme='blue' p='3' borderColor={'blue.400'} shadow='md' w='100%' borderWidth='2px' rounded={'md'}>
+                      <ArrowBackIcon />
+                      <Text display={{ base: 'none', lg: 'inline-block' }} ml='3'>Surat Sebelumnya {detail.surat_sebelumnya.nama_latin}</Text>
+                    </Button>
+                  </Link>
+                  : ''
+                }
+              </GridItem>
+              <GridItem w='100%'>
+                <Button colorScheme='blue' onClick={toggle} p='3' borderColor={'blue.400'} shadow='md' w='100%' borderWidth='2px' rounded={'md'}>
+                  <Heading fontSize={'l'} textAlign='center'>
+                    {playing ?
+                      <Icon viewBox="0 0 320 512" mb='1' ><path fill='currentColor' d="M272 63.1l-32 0c-26.51 0-48 21.49-48 47.1v288c0 26.51 21.49 48 48 48L272 448c26.51 0 48-21.49 48-48v-288C320 85.49 298.5 63.1 272 63.1zM80 63.1l-32 0c-26.51 0-48 21.49-48 48v288C0 426.5 21.49 448 48 448l32 0c26.51 0 48-21.49 48-48v-288C128 85.49 106.5 63.1 80 63.1z" />
+                      </Icon>
+                      :
+                      <Icon viewBox="0 0 384 512" mb='1' ><path fill='currentColor' d="M361 215C375.3 223.8 384 239.3 384 256C384 272.7 375.3 288.2 361 296.1L73.03 472.1C58.21 482 39.66 482.4 24.52 473.9C9.377 465.4 0 449.4 0 432V80C0 62.64 9.377 46.63 24.52 38.13C39.66 29.64 58.21 29.99 73.03 39.04L361 215z" />
+                      </Icon>
+                    }
+                    <Text display={'inline-block'} ml='2'>{playing ? "Stop" : "Play"} Audio</Text>
+                  </Heading>
+                </Button>
+              </GridItem>
+              <GridItem w='100%'>
+                {detail.surat_selanjutnya ?
+                  <Link
+                    as={Href}
+                    to={`/quran/${detail.surat_selanjutnya.nomor}`}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <Button variant='outline' colorScheme='blue' p='3' borderColor={'blue.400'} shadow='md' w='100%' borderWidth='2px' rounded={'md'}>
+                      <ArrowForwardIcon />
+                      <Text display={{ base: 'none', lg: 'inline-block' }} ml='3'>Surat Selanjutnya {detail.surat_selanjutnya.nama_latin}</Text>
+                    </Button>
+                  </Link>
+                  :
+                  ''
+                }
+              </GridItem>
+            </Grid>
           </SimpleGrid>
         ) : (
           <div>

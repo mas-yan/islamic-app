@@ -1,21 +1,30 @@
 import { useEffect, useState } from 'react';
-import { Box, Link, Text, Container, SimpleGrid, SkeletonText, HStack, Spacer, useColorModeValue } from '@chakra-ui/react'
+import {
+  Box, Link, Text, Container, SimpleGrid, SkeletonText, HStack, Spacer, useColorModeValue
+} from '@chakra-ui/react'
 import { Link as Href } from 'react-router-dom';
 import Ayat from "../../assets/ayat.png";
 import Ayat1 from "../../assets/ayat1.png";
+import Error from '../Error';
 
 function Alquran() {
   const [loading, setLoading] = useState(true);
   const [quran, setQuran] = useState([]);
+  const [error, setError] = useState(false);
 
   const bg = useColorModeValue(`url(${Ayat})`, `url(${Ayat1})`)
   const color = useColorModeValue('black', 'white');
 
   const fetchQuran = async () => {
     const response = await fetch('https://quran-api.santrikoding.com/api/surah')
-    const data = await response.json()
-    setQuran(data)
-    setLoading(false)
+    if (response.status == 200) {
+      const data = await response.json()
+      setQuran(data)
+      setLoading(false)
+    } else {
+      setLoading(false)
+      setError(true)
+    }
   }
   useEffect(() => {
     fetchQuran()
@@ -72,6 +81,8 @@ function Alquran() {
           )}
         </SimpleGrid>
       }
+      {
+        error && <Error />}
 
     </Container >
   )

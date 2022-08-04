@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { Modal, ModalContent, Container, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, ModalOverlay, Box, Heading, useDisclosure, Spinner, Button, Text, SimpleGrid, SkeletonText, Circle, Center, useColorModeValue } from '@chakra-ui/react'
+import {
+  Modal, ModalContent, Container, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, ModalOverlay, Box, Heading, useDisclosure, Spinner, Button, Text, SimpleGrid, SkeletonText, Center
+} from '@chakra-ui/react'
+import Error from "./Error";
 function Doa() {
 
   // get all start
@@ -10,22 +13,28 @@ function Doa() {
   let [page, setPage] = useState(1);
   const [lastpage, setLastPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const getDoa = async () => {
     const response = await fetch(
       `https://api-islamic.herokuapp.com/api/doa?page=${page}`
     );
-    const data = await response.json();
-    setLastPage(data.last_page);
-    setLoading(false)
-    if (page <= lastpage) {
-      setCircle(true);
-      setIsNext(false)
-      setDoa([...doa, ...data.data]);
-      setPage(page + 1)
+    if (response.status == 200) {
+      const data = await response.json();
+      setLastPage(data.last_page);
+      setLoading(false)
+      if (page <= lastpage) {
+        setCircle(true);
+        setIsNext(false)
+        setDoa([...doa, ...data.data]);
+        setPage(page + 1)
+      } else {
+        setCircle(false)
+        setEnd(true)
+      }
     } else {
-      setCircle(false)
-      setEnd(true)
+      setLoading(false)
+      setError(true)
     }
   };
 
@@ -134,6 +143,9 @@ function Doa() {
             </Box>
           )}
         </SimpleGrid>
+      }
+      {
+        error && <Error />
       }
     </Container >
   );

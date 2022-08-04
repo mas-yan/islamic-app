@@ -1,5 +1,5 @@
 import {
-  Box, SimpleGrid, Text, Link, Image, Accordion, AccordionItem, AccordionPanel, AccordionIcon, AccordionButton, Button, useColorModeValue, SkeletonText, Heading, Grid, GridItem, Container, Icon
+  Box, SimpleGrid, Text, Link, Image, Accordion, AccordionItem, AccordionPanel, AccordionIcon, AccordionButton, Button, useColorModeValue, SkeletonText, Heading, Grid, GridItem, Container, Icon,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 import { useEffect, useState, useRef } from "react";
@@ -7,6 +7,7 @@ import { Link as Href, useParams } from "react-router-dom";
 import Ayat from "../../assets/ayat.png";
 import Ayat1 from "../../assets/ayat1.png";
 import HeadSurah1 from "../../assets/surah.png";
+import Error from "../Error";
 
 function Detail() {
   const params = useParams()
@@ -252,11 +253,7 @@ function Detail() {
               </GridItem>
             </Grid>
           </SimpleGrid>
-        ) : (
-          <div>
-            <h1>404</h1>
-          </div>
-        )
+        ) : (<Error />)
         }
       </Container>
     </div >

@@ -66,6 +66,7 @@ function Detail() {
 
   const bg = useColorModeValue(`url(${Ayat})`, `url(${Ayat1})`)
   const color = useColorModeValue('black', 'white');
+  const txtColor = useColorModeValue('blue.700', 'white')
   const mySyle = {
     backgroundImage: bg,
     color: color,
@@ -93,12 +94,12 @@ function Detail() {
                   <Image src={HeadSurah1}></Image>
                   <Box maxW={'100%'} w='100%' textAlign='center'>
                     <Box position={'absolute'} maxW={'100%'} w='100%' textAlign='center'>
-                      <Text noOfLines='1' ml={{ base: '-72%', md: '-36%' }} fontWeight={'bold'} fontSize={{ base: '11px', md: '25px', lg: '25px' }} maxW={{ base: '50 % ', md: '100% ' }} mt={{ md: 4, base: '2%' }}>{detail.tempat_turun}</Text>
+                      <Text color={txtColor} noOfLines='1' ml={{ base: '-72%', md: '-36%' }} fontWeight={'bold'} fontSize={{ base: '11px', md: '25px', lg: '25px' }} maxW={{ base: '50 % ', md: '100% ' }} mt={{ md: 4, base: '2%' }}>{detail.tempat_turun}</Text>
                     </Box>
-                    <Text noOfLines='1' ml={{ base: '25%', md: 0 }} fontWeight={'bold'} fontSize={{ base: '15px', md: '30px' }} maxW={{ base: '50%', md: '100%' }} mt={{ md: '-10.5%', lg: '-9.5%', base: -9 }}>{detail.nama}</Text>
-                    <Text noOfLines='1' ml={{ base: '25%', md: 0 }} fontWeight={'bold'} fontSize={{ base: '10px', md: '25px', lg: '25px' }} maxW={{ base: '50%', md: '100%' }} mt={{ md: -1, base: -1.5 }}>{detail.nama_latin}</Text>
+                    <Text color={txtColor} noOfLines='1' ml={{ base: '25%', md: 0 }} fontWeight={'bold'} fontSize={{ base: '15px', md: '30px' }} maxW={{ base: '50%', md: '100%' }} mt={{ md: '-10.5%', lg: '-9.5%', base: -9 }}>{detail.nama}</Text>
+                    <Text color={txtColor} noOfLines='1' ml={{ base: '25%', md: 0 }} fontWeight={'bold'} fontSize={{ base: '10px', md: '25px', lg: '25px' }} maxW={{ base: '50%', md: '100%' }} mt={{ md: -1, base: -1.5 }}>{detail.nama_latin}</Text>
                     <Box position={'absolute'} maxW={'100%'} w='100%' textAlign='center'>
-                      <Text noOfLines='1' ml={{ base: '72%', md: '72%' }} fontWeight={'bold'} fontSize={{ base: '11px', md: '25px', lg: '25px' }} maxW={{ base: '50 % ', md: '100% ' }} mt={{ md: '-8%', lg: '-16', base: '-6.5%' }}>{detail.jumlah_ayat} Ayat</Text>
+                      <Text color={txtColor} noOfLines='1' ml={{ base: '72%', md: '72%' }} fontWeight={'bold'} fontSize={{ base: '11px', md: '25px', lg: '25px' }} maxW={{ base: '50 % ', md: '100% ' }} mt={{ md: '-8%', lg: '-16', base: '-6.5%' }}>{detail.jumlah_ayat} Ayat</Text>
                     </Box>
                   </Box>
                 </Box>
@@ -108,8 +109,8 @@ function Detail() {
                       <AccordionButton>
                         <Box flex='1' textAlign='left'>
                           <Heading fontSize={{ base: 'l', md: 'xl' }} textAlign='center'>
-                            <Text display={'inline-block'} >Deskripsi Surat {detail.nama_latin}</Text>
-                            <AccordionIcon />
+                            <Text color={txtColor} display={'inline-block'} >Deskripsi Surat {detail.nama_latin}</Text>
+                            <AccordionIcon color={txtColor} />
                           </Heading>
                         </Box>
                       </AccordionButton>

@@ -45,7 +45,7 @@ function App() {
     <div>
       <Navbar />
       <div className="top-to-btm" onClick={scrollToTop}>
-        <ArrowUpIcon bg={useColorModeValue('gray.700', 'gray.300')} borderColor='black' color={useColorModeValue('white', 'black')} className="icon-position icon-style" h='8' w='8' style={{ display: visible ? 'inline' : 'none' }} />
+        <ArrowUpIcon bg={useColorModeValue('blue.700', 'white')} borderColor='black' color={useColorModeValue('white', 'blue.700')} className="icon-position icon-style" h='8' w='8' style={{ display: visible ? 'inline' : 'none' }} />
       </div>
       <Routes>
         <Route path='/' element={<Home />}></Route>

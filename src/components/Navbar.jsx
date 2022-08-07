@@ -78,7 +78,7 @@ function Navbar() {
               rounded={'md'}
               _hover={{
                 textDecoration: 'none',
-                bg: 'blue.600',
+                bg: useColorModeValue('blue.600', 'gray.500'),
                 color: 'white',
               }}
               _activeLink={{ bg: useColorModeValue('blue.700', 'white'), color: useColorModeValue('white', 'blue.700') }}

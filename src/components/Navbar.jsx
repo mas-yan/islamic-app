@@ -37,13 +37,15 @@ const Links = [
     name: 'Asmaul Husna',
     link: '/asmaulhusna',
   },
+  {
+    name: 'Jadwal Sholat',
+    link: '/jadwal',
+  },
 ]
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  let resolved = useResolvedPath(location.pathname);
-  let path = resolved.pathname;
   return (
     <Box zIndex="999" fontWeight={'bold'} width="100%" boxShadow='md' position={'sticky'} top={0} backdropFilter='auto' backdropBlur='8px' px={4}>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>

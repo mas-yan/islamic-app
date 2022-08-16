@@ -1,12 +1,19 @@
 .widget-header {
   position: absolute;
   width: 90%;
-  max-width: 850px;
   bottom: 0;
   left: 50%;
   right: 50%;
   transform: translate(-50%, 50%);
   border-radius: 8px;
+}
+
+.widget-home {
+  max-width: 850px;
+}
+
+.widget-sholat {
+  max-width: 600px;
 }
 
 .header {

@@ -15,7 +15,7 @@ import {
   Text,
   Skeleton
 } from '@chakra-ui/react'
-import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon } from '@chakra-ui/icons';
+import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon, CalendarIcon, TimeIcon } from '@chakra-ui/icons';
 import City from './City';
 import { useEffect, useState } from 'react';
 
@@ -208,10 +208,9 @@ const Jadwal = () => {
           <Text display={'inline'} fontWeight='bold' fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')}>{month}</Text>
           <button style={{ margin: '0 10px' }} onClick={() => { getNextDate() }}><ArrowRightIcon fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')} /></button>
           <Box shadow={'base'} py='1.5' m='2.5' bg={useColorModeValue('white', 'gray.300')} borderRadius={'md'}>
-            {jam ? <Text color={'black'} fontWeight='normal'>{sholatDay.tanggal}</Text> : <Skeleton height='5' w='130px' display={'inline-block'} mb='-1' />}
+            {jam ? <Text color={'black'} fontWeight='normal'><CalendarIcon mb='1.5' /> {sholatDay.tanggal}</Text> : <Skeleton height='5' w='130px' display={'inline-block'} mb='-1' />}
             <Heading fontSize={'2xl'} py='2'>
-              {/* <Text color={'blue.700'} fontWeight='bold'>{jam}</Text> */}
-              {jam ? (<Text color={'blue.700'} fontWeight='bold'>{jam}</Text>) : <Skeleton height='6' w='130px' display={'inline-block'} mb='-1' />}
+              {jam ? (<Text color={'blue.700'} fontWeight='bold'><TimeIcon mb={1.5} w={5} h={5} /> {jam}</Text>) : <Skeleton height='6' w='130px' display={'inline-block'} mb='-1' />}
             </Heading>
             {jam ? (<Box px='4'>
               Berikutnya <Text display={'inline'} fontWeight='bold'> {next.countDown} </Text>menuju <Text display={'inline'} fontWeight='bold'>{next.name}</Text> untuk daerah <Text display={'inline'} fontWeight='bold'>{value.label}</Text>

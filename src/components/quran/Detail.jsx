@@ -25,7 +25,7 @@ function Detail() {
     try {
       let [first, second] = await Promise.all([
         fetch(`https://quran-api.santrikoding.com/api/surah/${params.id}`),
-        fetch(`https://api.npoint.io/99c279bb173a6e28359c/surat/${params.id}`)
+        fetch(`https://al-quran-8d642.firebaseio.com/surat/${params.id}.json?print=pretty`)
       ]);
       const resultFirst = await first.json()
       const resultSecond = await second.json()

@@ -19,6 +19,7 @@ import {
 import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon, CalendarIcon, TimeIcon } from '@chakra-ui/icons';
 import City from './City';
 import { useEffect, useState } from 'react';
+import Adzan from "./../assets/sound/adzan.mp3";
 
 const Jadwal = () => {
   // Memformat tanggal
@@ -187,6 +188,30 @@ const Jadwal = () => {
     return () => clearInterval(intervalId);
   })
 
+  // Memutar audio adzan
+  useEffect(() => {
+    const adzan = document.getElementById('adzan')
+    // document.body.onclick = () => {
+    //   adzan.play()
+    //   adzan.pause()
+    // }
+
+    const { name, countDown } = next
+    console.log(name);
+    switch (name) {
+      case 'subuh':
+      case 'dzuhur':
+      case 'ashar':
+      case 'maghrib':
+      case 'isya':
+        if (countDown === '00:00:00') adzan.play()
+        break
+
+      default:
+        break
+    }
+  })
+
   useEffect(() => {
     getMonth()
     getDate()
@@ -197,7 +222,7 @@ const Jadwal = () => {
   }, [day, city])
 
   return (
-    <Container maxW='container.xl' mt='32' mb={'30px'}>
+    <Container maxW='container.xl' mt={{ md: 36, base: 40 }} mb={'30px'}>
       <div className="header">
         <Box className="widget-header widget-sholat" textAlign={'center'} position={'absolute'} bottom='0' bg={useColorModeValue('gray.100', 'gray.600')} color='black'>
           <Heading mt={4} fontSize={{ base: 'sm', md: 'xl' }}>
@@ -218,7 +243,7 @@ const Jadwal = () => {
           </Box>
         </Box >
       </div >
-      <Box p={5} shadow='md' borderWidth='1px' pt={20} rounded={'lg'} textAlign='center'>
+      <Box p={5} shadow='md' borderWidth='1px' pt={{ md: 24, base: 28 }} rounded={'lg'} textAlign='center'>
         <Heading fontSize={'2xl'} mt='10'>
           <Text color={useColorModeValue('blue.700', 'white')}>kalender sholat khusus bulan {month}</Text>
         </Heading>
@@ -258,6 +283,13 @@ const Jadwal = () => {
           </Table>
         </TableContainer>
       </Box>
+      <audio
+        id="adzan"
+        controls
+        src={Adzan}
+        style={{ display: "none" }}
+        loading="lazy"
+      />
     </Container >
   );
 }

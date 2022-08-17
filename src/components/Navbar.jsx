@@ -14,8 +14,9 @@ import {
   Collapse
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import Logo from "../assets/logo.png";
+import Logo from "../assets/img/logo.png";
 
+// data link navbar
 const Links = [
   {
     name: 'home',

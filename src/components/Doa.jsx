@@ -5,7 +5,7 @@ import {
 import Error from "./Error";
 function Doa() {
 
-  // get all start
+  // state
   const [doa, setDoa] = useState([]);
   const [isNext, setIsNext] = useState(false);
   const [circle, setCircle] = useState(false);
@@ -15,6 +15,7 @@ function Doa() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  // get data from api
   const getDoa = async () => {
     const response = await fetch(
       `https://api-islamic.herokuapp.com/api/doa?page=${page}`
@@ -38,6 +39,7 @@ function Doa() {
     }
   };
 
+  // handle scroll
   function handleScroll() {
     setIsNext(true)
   }

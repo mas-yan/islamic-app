@@ -3,18 +3,21 @@ import {
   Box, Link, Text, Container, SimpleGrid, SkeletonText, HStack, Spacer, useColorModeValue
 } from '@chakra-ui/react'
 import { Link as Href } from 'react-router-dom';
-import Ayat from "../../assets/ayat.png";
-import Ayat1 from "../../assets/ayat1.png";
+import Ayat from "../../assets/img/ayat.png";
+import Ayat1 from "../../assets/img/ayat1.png";
 import Error from '../Error';
 
 function Alquran() {
+  // state
   const [loading, setLoading] = useState(true);
   const [quran, setQuran] = useState([]);
   const [error, setError] = useState(false);
 
+  // color ligth/dark
   const bg = useColorModeValue(`url(${Ayat})`, `url(${Ayat1})`)
   const color = useColorModeValue('black', 'white');
 
+  // fetch data from api
   const fetchQuran = async () => {
     const response = await fetch('https://quran-api.santrikoding.com/api/surah')
     if (response.status == 200) {
@@ -26,10 +29,12 @@ function Alquran() {
       setError(true)
     }
   }
+
   useEffect(() => {
     fetchQuran()
   }, [])
 
+  // style css
   const mySyle = {
     backgroundImage: bg,
     color: color,

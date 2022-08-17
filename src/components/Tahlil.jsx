@@ -4,19 +4,16 @@ import {
 import { useEffect, useState } from "react";
 import Error from "./Error";
 
-import Pray from "../assets/pray.png";
-
 function Tahlil() {
+
+  // initial state
   const [tahlil, setTahlil] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const txtColor = useColorModeValue('blue.700', 'white')
   const border = useColorModeValue('white', 'gray.800')
 
-  // const bg = {
-  //   background: `url(${Pray}) right center no-repeat`,
-  //   backgroundColor: 'right 30px center'
-  // }
+  // fetch date from api
   const getData = async () => {
     const response = await fetch('https://islamic-api-zhirrr.vercel.app/api/tahlil')
 
@@ -35,10 +32,6 @@ function Tahlil() {
   }, []);
   return (
     <Container mb={5} mt='1' maxW={'1000px'}>
-      {/* <Box w='100%' bgGradient='linear(to-r, blue.700, blue.900)' p='3' rounded={'md'} shadow='md'>
-        <Text color={'white'} fontWeight='bold'>Tahlilan merupakan ritual pembacaan lafal tahlil yang lazim di masyarakat Nusantara sejak ratusan tahun. Pembacaan tahlil biasa dilakukan oleh masyarakat dalam rangka mendoakan jenazah baru di makamnya, ahli kubur yang telah lama dimakamkan, dan mendoakan ahli kubur dalam peringatan 1-7 hari, 15 hari, 40 hari, 100 hari, 1000 hari di rumah ahli musibah.</Text>
-        <Image src={Pray} position={'absolute'} w='40%' top='-100px' />
-      </Box> */}
       {
         loading ?
           <Center h='500px'>

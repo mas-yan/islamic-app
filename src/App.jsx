@@ -10,12 +10,14 @@ import Jadwal from "./components/Jadwal";
 import { useEffect, useState } from "react";
 import { useColorModeValue } from "@chakra-ui/react";
 import { ArrowUpIcon } from '@chakra-ui/icons'
-import './assets/style.css';
+import './assets/style/style.css';
 function App() {
+  // initial
   const { pathname } = useLocation();
 
   const [visible, setVisible] = useState(false)
 
+  // if page scroll will show icon
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 300) {
@@ -26,6 +28,7 @@ function App() {
     }
   };
 
+  // handle scroll to top
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

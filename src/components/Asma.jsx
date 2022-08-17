@@ -1,13 +1,16 @@
 import { SimpleGrid, Box, Image, Text, Tooltip, useColorModeValue, Spinner, Center } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
-import gambar from "../assets/asmaulhusna.png";
-import gambar1 from "../assets/asmaulhusna2.png";
+import gambar from "../assets/img/asmaulhusna.png";
+import gambar1 from "../assets/img/asmaulhusna2.png";
 import Error from './Error';
 function Asma() {
 
+  // state
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  // fetch date from api
   const fetchData = async () => {
     const response = await fetch('https://islamic-api-zhirrr.vercel.app/api/asmaulhusna')
     if (response.status == 200) {
@@ -19,6 +22,7 @@ function Asma() {
       setError(true)
     }
   }
+  // color light/dark
   const image = useColorModeValue(gambar, gambar1)
 
   useEffect(() => {

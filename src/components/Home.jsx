@@ -13,9 +13,10 @@ import City from './City';
 
 import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
-import './../assets/style.css';
+import './../assets/style/style.css';
 
 function Home() {
+  // initial
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [jadwal, setJadwal] = useState([])
   const [day, setDay] = useState()
@@ -23,6 +24,7 @@ function Home() {
   const [value, setValue] = useState(fromLocal)
   const [city, setCity] = useState()
 
+  // fetch date from api
   const getJadwal = async () => {
     const date = new Date()
     const now = day ? day : `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
@@ -39,11 +41,13 @@ function Home() {
     }
   }
 
+  // set date from now
   const setNow = (newDate) => {
     const date = newDate || new Date();
     setDay(date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate())
   };
 
+  // handle next date
   const getNextDate = () => {
     const now = day ? day : new Date()
     const currentDayInMilli = new Date(now).getTime()
@@ -53,6 +57,7 @@ function Home() {
     setNow(previousDate)
   }
 
+  // handle prev date
   const getPreviousDate = () => {
     const now = day ? day : new Date()
     const currentDayInMilli = new Date(now).getTime()
@@ -62,6 +67,7 @@ function Home() {
     setNow(previousDate)
   }
 
+  // if there is change
   function handleChange(newValue) {
     setValue(newValue);
     setCity(newValue);

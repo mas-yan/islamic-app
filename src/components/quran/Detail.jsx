@@ -4,12 +4,13 @@ import {
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 import { useEffect, useState, useRef } from "react";
 import { Link as Href, useParams } from "react-router-dom";
-import Ayat from "../../assets/ayat.png";
-import Ayat1 from "../../assets/ayat1.png";
-import HeadSurah1 from "../../assets/surah.png";
+import Ayat from "../../assets/img/ayat.png";
+import Ayat1 from "../../assets/img/ayat1.png";
+import HeadSurah1 from "../../assets/img/surah.png";
 import Error from "../Error";
 
 function Detail() {
+  // state
   const params = useParams()
   const [surah, setSurah] = useState([])
   const [detail, setDetail] = useState({})
@@ -19,6 +20,7 @@ function Detail() {
   const [audio, setAudio] = useState(new Audio());
   let audios = useRef();
 
+  // fetch data from api
   const getSurah = async () => {
     try {
       let [first, second] = await Promise.all([
@@ -42,6 +44,7 @@ function Detail() {
     };
   }
 
+  // togle play sound
   const toggle = () => setPlaying(!playing);
 
 
@@ -65,9 +68,12 @@ function Detail() {
   }, [])
 
 
+  // color ligh/dark
   const bg = useColorModeValue(`url(${Ayat})`, `url(${Ayat1})`)
   const color = useColorModeValue('black', 'white');
   const txtColor = useColorModeValue('blue.700', 'white')
+
+  // style css
   const mySyle = {
     backgroundImage: bg,
     color: color,

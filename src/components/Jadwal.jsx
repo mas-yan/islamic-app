@@ -13,7 +13,8 @@ import {
   useColorModeValue,
   useDisclosure,
   Text,
-  Skeleton
+  Skeleton,
+  Spinner
 } from '@chakra-ui/react'
 import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon, CalendarIcon, TimeIcon } from '@chakra-ui/icons';
 import City from './City';
@@ -164,7 +165,6 @@ const Jadwal = () => {
         delete data.data.jadwal['tanggal']
         delete data.data.jadwal['date']
         delete data.data.jadwal['dhuha']
-        delete data.data.jadwal['imsak']
         delete data.data.jadwal['terbit']
         setTime(data.data)
         getNext()
@@ -223,8 +223,8 @@ const Jadwal = () => {
           <Text color={useColorModeValue('blue.700', 'white')}>kalender sholat khusus bulan {month}</Text>
         </Heading>
         <TableContainer mt={4} borderWidth='1px' rounded={'md'} shadow='sm'>
-          <Table constiant='simple' size={'md'}>
-            <TableCaption>kalender sholat khusus bulan {month}</TableCaption>
+          <Table variant='simple' size={'md'}>
+            <TableCaption> {sholat.length > 0 ? `kalender sholat khusus bulan ${month}` : <Spinner />}</TableCaption>
             <Thead>
               <Tr>
                 <Th>Tanggal</Th>

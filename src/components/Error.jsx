@@ -2,7 +2,7 @@ import {
   Alert,
   AlertIcon,
   AlertTitle,
-  AlertDescription, Center, HStack, Spacer, useColorModeValue
+  AlertDescription, Center
 } from '@chakra-ui/react'
 const Error = () => {
   return (

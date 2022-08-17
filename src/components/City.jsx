@@ -5,7 +5,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
@@ -13,6 +12,7 @@ import Select from 'react-select'
 import { useEffect, useRef, useState } from 'react';
 
 export default function City({ onChange, isOpen, onClose }) {
+  // initial
   const initialRef = useRef(null)
   const fromLocal = JSON.parse(localStorage.getItem('kota') || JSON.stringify({ value: '1301', label: 'KOTA JAKARTA' }));
 
@@ -20,6 +20,7 @@ export default function City({ onChange, isOpen, onClose }) {
   const [select, setSelect] = useState()
   const [lokasi, setLokasi] = useState();
 
+  // if change city
   const handleChange = e => {
     setSelect(e)
     setKota(e)
@@ -27,6 +28,7 @@ export default function City({ onChange, isOpen, onClose }) {
     onClose()
   }
 
+  // fetch date from api
   const getLokasi = async () => {
     const response = await fetch(
       `https://api.myquran.com/v1/sholat/kota/semua`
@@ -46,6 +48,7 @@ export default function City({ onChange, isOpen, onClose }) {
     getLokasi()
     localStorage.setItem('kota', JSON.stringify(kota))
   }, [select])
+
   return (
     <div>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>

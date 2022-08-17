@@ -42,6 +42,10 @@ const Links = [
     name: 'Jadwal Sholat',
     link: '/jadwal',
   },
+  {
+    name: 'Berita',
+    link: '/berita',
+  },
 ]
 
 function Navbar() {

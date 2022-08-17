@@ -7,6 +7,7 @@ import Doa from "./components/Doa";
 import Tahlil from "./components/Tahlil";
 import Asma from "./components/Asma";
 import Jadwal from "./components/Jadwal";
+import Berita from "./components/Berita";
 import { useEffect, useState } from "react";
 import { useColorModeValue } from "@chakra-ui/react";
 import { ArrowUpIcon } from '@chakra-ui/icons'
@@ -59,6 +60,7 @@ function App() {
         <Route path='/tahlil' element={<Tahlil />}></Route>
         <Route path='/asmaulhusna' element={<Asma />}></Route>
         <Route path='/jadwal' element={<Jadwal />}></Route>
+        <Route path='/berita' element={<Berita />}></Route>
       </Routes>
     </div >
   )

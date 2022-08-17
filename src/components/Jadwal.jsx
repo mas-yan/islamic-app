@@ -197,7 +197,7 @@ const Jadwal = () => {
     // }
 
     const { name, countDown } = next
-    console.log(name);
+    // console.log(name);
     switch (name) {
       case 'subuh':
       case 'dzuhur':

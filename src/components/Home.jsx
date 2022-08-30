@@ -112,8 +112,8 @@ function Home() {
           </Stack>
           <Blur
             position={'absolute'}
-            top={-10}
-            left={{ lg: 50, base: - 10 }}
+            top={{ base: 8, lg: -10 }}
+            left={{ lg: 50, base: -10 }}
             style={{ filter: 'blur(70px)' }}
           />
         </Stack>
@@ -172,12 +172,12 @@ function Home() {
           </SimpleGrid>
         </Box >
       </div >
-      <Box py={'80px'} pt={{ base: '130px', md: '180px' }} bg={useColorModeValue('white', 'gray.700')} width="100%">
+      <Box py={'80px'} pt={{ base: '130px', md: '130px' }} bg={useColorModeValue('white', 'gray.700')} width="100%">
         <Container maxW={'7xl'}>
           <Box
             zIndex={1}
             textAlign='center'>
-            <Text pt='10' fontWeight={'bold'} fontSize='20' ml='2' as={'span'} >
+            <Text pt='10' fontWeight={'bold'} fontSize={{ base: '2xl', lg: '4xl' }} ml='2' as={'span'} >
               بَلِّغُوا عَنِّى وَلَوْ آيَة
             </Text>
             <Text fontStyle='italic' ml='2'>
@@ -196,7 +196,6 @@ export const Blur = (IconProps) => {
   return (
     <Icon
       width={useBreakpointValue({ base: '80%', md: '40vw', lg: '30vw' })}
-      // zIndex={useBreakpointValue({ base: -1, md: -1, lg: 0 })}
       height={{ base: 250, lg: "560px" }}
       viewBox="0 0 528 560"
       fill="none"
@@ -207,7 +206,6 @@ export const Blur = (IconProps) => {
       <circle cy="291" r="139" fill="#ED64A6" />
       <circle cx="80.5" cy="189.5" r="101.5" fill="#ED8936" />
       <circle cx="196.5" cy="317.5" r="101.5" fill="#ECC94B" />
-      <circle cx="70.5" cy="458.5" r="101.5" fill="#48BB78" />
       <circle cx="426.5" cy="-0.5" r="101.5" fill="#4299E1" />
     </Icon>
   );

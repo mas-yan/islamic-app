@@ -40,9 +40,9 @@ function Tahlil() {
           : tahlil.map((item, index) => (
             <Box key={index} shadow='md' borderWidth='1px' mt='3' rounded={'md'}>
               <Box p={5}>
-                <Text color={txtColor} fontWeight='bold'>{index + 1}.) {item.title}:</Text>
+                <Text color={'blue.400'} fontWeight='bold'>{index + 1}.) {item.title}:</Text>
                 <Heading fontSize={{ lg: '4xl', base: '2xl' }} mt={5} justifyContent={'center'}>
-                  <Text color={txtColor} textAlign={'center'} lineHeight='2' fontWeight='bold'>{item.arabic}</Text>
+                  <Text textAlign={'center'} lineHeight='2' fontWeight='bold'>{item.arabic}</Text>
                 </Heading>
               </Box>
               <Accordion allowToggle border={border} borderWidth='0px'>

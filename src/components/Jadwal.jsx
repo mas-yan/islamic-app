@@ -244,12 +244,12 @@ const Jadwal = () => {
         </Box >
       </div >
       <Box p={5} shadow='md' borderWidth='1px' pt={{ md: 24, base: 28 }} rounded={'lg'} textAlign='center'>
-        <Heading fontSize={'2xl'} mt='10'>
-          <Text color={useColorModeValue('blue.700', 'white')}>kalender sholat khusus bulan {month}</Text>
+        <Heading fontSize={{ lg: '2xl', base: 'xl' }} mt={{ lg: '10', base: 5 }}>
+          <Text color={useColorModeValue('blue.700', 'white')}>kalender sholat {value.label} bulan {month}</Text>
         </Heading>
         <TableContainer mt={4} borderWidth='1px' rounded={'md'} shadow='sm'>
           <Table variant='simple' size={'md'}>
-            <TableCaption> {sholat.length > 0 ? `kalender sholat khusus bulan ${month}` : <Spinner />}</TableCaption>
+            <TableCaption> {sholat.length > 0 ? `kalender sholat ${value.label} bulan ${month}` : <Spinner />}</TableCaption>
             <Thead>
               <Tr>
                 <Th>Tanggal</Th>

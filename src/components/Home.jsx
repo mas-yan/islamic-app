@@ -9,7 +9,10 @@ import {
   useDisclosure,
   Stack,
   Icon,
-  useBreakpointValue
+  useBreakpointValue,
+  Flex,
+  Avatar,
+  chakra
 } from '@chakra-ui/react';
 
 import City from './City';
@@ -17,6 +20,62 @@ import City from './City';
 import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 import './../assets/style/style.css';
+const testimonials = [
+  {
+    name: 'Brandon P.',
+    role: 'Chief Marketing Officer',
+    content:
+      'It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!',
+    avatar:
+      'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
+  },
+  {
+    name: 'Krysta B.',
+    role: 'Entrepreneur',
+    content:
+      "I didn't even need training. We've used EEZY for the last five years. I have gotten at least 50 times the value from EEZY. I made back the purchase price in just 48 hours!",
+    avatar:
+      'https://images.unsplash.com/photo-1598550874175-4d0ef436c909?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
+  },
+  {
+    name: 'Darcy L.',
+    role: 'Movie star',
+    content:
+      "Thank you for making it painless, pleasant and most of all, hassle free! I'm good to go. No matter where you go, EEZY is the coolest, most happening thing around! I love EEZY!",
+    avatar:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=334&q=80',
+  },
+  {
+    name: 'Daniel T.',
+    role: 'Musician',
+    content:
+      'I am so pleased with this product. EEZY is both attractive and highly adaptable. Without EEZY, we would have gone bankrupt by now. Thank you for creating this product!',
+    avatar:
+      'https://images.unsplash.com/photo-1606513542745-97629752a13b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
+  },
+  {
+    name: 'Darcy L.',
+    role: 'Movie star',
+    content:
+      "Thank you for making it painless, pleasant and most of all, hassle free! I'm good to go. No matter where you go, EEZY is the coolest, most happening thing around! I love EEZY!",
+    avatar:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=334&q=80',
+  },
+  {
+    name: 'Daniel T.',
+    role: 'Musician',
+    content:
+      'I am so pleased with this product. EEZY is both attractive and highly adaptable. Without EEZY, we would have gone bankrupt by now. Thank you for creating this product!',
+    avatar:
+      'https://images.unsplash.com/photo-1606513542745-97629752a13b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
+  },
+];
+const backgrounds = [
+  `url("data:image/svg+xml, %3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'560\' height=\'185\' viewBox=\'0 0 560 185\' fill=\'none\'%3E%3Cellipse cx=\'102.633\' cy=\'61.0737\' rx=\'102.633\' ry=\'61.0737\' fill=\'%23ED64A6\' /%3E%3Cellipse cx=\'399.573\' cy=\'123.926\' rx=\'102.633\' ry=\'61.0737\' fill=\'%23F56565\' /%3E%3Cellipse cx=\'366.192\' cy=\'73.2292\' rx=\'193.808\' ry=\'73.2292\' fill=\'%2338B2AC\' /%3E%3Cellipse cx=\'222.705\' cy=\'110.585\' rx=\'193.808\' ry=\'73.2292\' fill=\'%23ED8936\' /%3E%3C/svg%3E")`,
+  `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='185' viewBox='0 0 560 185' fill='none'%3E%3Cellipse cx='457.367' cy='123.926' rx='102.633' ry='61.0737' transform='rotate(-180 457.367 123.926)' fill='%23ED8936'/%3E%3Cellipse cx='160.427' cy='61.0737' rx='102.633' ry='61.0737' transform='rotate(-180 160.427 61.0737)' fill='%2348BB78'/%3E%3Cellipse cx='193.808' cy='111.771' rx='193.808' ry='73.2292' transform='rotate(-180 193.808 111.771)' fill='%230BC5EA'/%3E%3Cellipse cx='337.295' cy='74.415' rx='193.808' ry='73.2292' transform='rotate(-180 337.295 74.415)' fill='%23ED64A6'/%3E%3C/svg%3E")`,
+  `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='185' viewBox='0 0 560 185' fill='none'%3E%3Cellipse cx='102.633' cy='61.0737' rx='102.633' ry='61.0737' fill='%23ED8936'/%3E%3Cellipse cx='399.573' cy='123.926' rx='102.633' ry='61.0737' fill='%2348BB78'/%3E%3Cellipse cx='366.192' cy='73.2292' rx='193.808' ry='73.2292' fill='%230BC5EA'/%3E%3Cellipse cx='222.705' cy='110.585' rx='193.808' ry='73.2292' fill='%23ED64A6'/%3E%3C/svg%3E")`,
+  `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='185' viewBox='0 0 560 185' fill='none'%3E%3Cellipse cx='457.367' cy='123.926' rx='102.633' ry='61.0737' transform='rotate(-180 457.367 123.926)' fill='%23ECC94B'/%3E%3Cellipse cx='160.427' cy='61.0737' rx='102.633' ry='61.0737' transform='rotate(-180 160.427 61.0737)' fill='%239F7AEA'/%3E%3Cellipse cx='193.808' cy='111.771' rx='193.808' ry='73.2292' transform='rotate(-180 193.808 111.771)' fill='%234299E1'/%3E%3Cellipse cx='337.295' cy='74.415' rx='193.808' ry='73.2292' transform='rotate(-180 337.295 74.415)' fill='%2348BB78'/%3E%3C/svg%3E")`,
+];
 
 function Home() {
   // initial
@@ -184,7 +243,72 @@ function Home() {
               "Sampaikanlah dariku walau hanya satu ayat"
             </Text>
           </Box>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut repellendus obcaecati sequi, similique doloremque cumque expedita rem ratione dignissimos enim sapiente perferendis placeat minus vitae rerum nihil dicta quam tempore dolor delectus necessitatibus magni qui beatae. Cum dolorum doloremque commodi suscipit cumque velit sed corrupti nulla exercitationem numquam expedita, sint illo vel culpa cupiditate maiores eligendi eaque saepe quasi ab esse aliquam! Voluptatum quaerat minima libero culpa, accusantium reiciendis quis explicabo sit doloremque nulla. Voluptatem assumenda repellendus atque. Eos nisi suscipit similique. Fugiat modi rerum quaerat eligendi, nesciunt blanditiis exercitationem eum rem magni qui eaque ut quisquam eos alias inventore corrupti iste mollitia aliquam officiis beatae, corporis doloremque hic quidem! Debitis voluptatum sed quia quo blanditiis, similique quas illum labore eos, voluptates exercitationem vitae provident reiciendis beatae possimus molestias repellendus veritatis ipsam! Cupiditate nesciunt a molestiae expedita eos maxime accusamus culpa ducimus consequatur sunt quaerat numquam perferendis explicabo animi, sint sapiente alias odit. Delectus accusamus praesentium ipsum molestiae non alias placeat facilis aspernatur odit exercitationem ea unde atque, veniam illo sed, esse, rem aliquam laboriosam iure. Ipsa amet incidunt delectus commodi eaque alias modi? Labore modi beatae ratione aliquid laudantium repellendus amet dolorem, mollitia libero quam doloribus. Illo omnis iste provident laboriosam quisquam nostrum, temporibus natus distinctio tenetur modi in mollitia sed expedita quos, aliquid ipsum quibusdam? Itaque explicabo officiis tempora omnis minus sapiente perferendis repellendus dolorum, vitae sed sunt? Aliquam, totam optio illum unde omnis repellendus ipsum corrupti, dolor, inventore animi exercitationem accusamus tenetur distinctio sint suscipit excepturi ea reiciendis commodi vero. Saepe hic expedita assumenda culpa nihil a doloremque, quae aliquid laboriosam laborum sed corrupti, quisquam voluptatibus velit ea tempore dicta molestiae enim magni tenetur, quod porro delectus. Numquam nisi reprehenderit earum atque alias! Tenetur earum et, repudiandae consequuntur delectus nihil deserunt ullam aut minus. Eligendi repellat nisi aliquam, tempore repellendus recusandae aut deleniti magni est cum rem eos sunt nostrum sequi, explicabo iusto porro nihil distinctio commodi maxime vitae quae corrupti? Beatae, vero! Eius quas velit hic, unde, aliquid a consectetur laboriosam corrupti reiciendis delectus ipsa ducimus saepe quibusdam laborum possimus maiores doloremque beatae. Id autem quibusdam in ut? Assumenda reprehenderit distinctio rerum quibusdam commodi maiores consequuntur consequatur? Autem unde incidunt dicta praesentium quasi ratione laborum quia obcaecati libero error, totam vel quisquam voluptas laboriosam earum, nisi velit iure minus perspiciatis deleniti doloribus beatae eos officia vitae? Quas recusandae deleniti aliquam tempore porro dolorem pariatur ipsa, magni ad, quae consequatur iure officiis? Est aut doloribus reiciendis optio accusamus aliquid, id impedit sint beatae iure qui sed doloremque dolore praesentium soluta. Ipsa quibusdam iusto quidem architecto animi fuga nihil reprehenderit quam quod repellendus, quis incidunt beatae in sunt, numquam assumenda enim error ut. Voluptate id corporis accusantium dolores quae culpa harum debitis nobis, quo dignissimos, ducimus ipsa? Dolores magnam saepe libero, est sit dolorem iste fuga quia minima laboriosam accusamus necessitatibus adipisci illo molestias voluptas quos maiores veniam, reprehenderit fugit non delectus optio totam. Animi aperiam soluta tempore expedita quod reiciendis ex reprehenderit totam sed voluptas deleniti numquam assumenda, omnis doloremque minus! Illo doloremque consectetur enim nobis cumque, similique voluptatibus id, assumenda magnam, obcaecati dolore quod pariatur tenetur alias recusandae labore nihil quibusdam expedita repellat. Porro voluptate explicabo laborum natus architecto ullam voluptatibus reprehenderit nobis repudiandae praesentium ipsam nulla sed fuga voluptatum itaque laudantium maiores, eligendi exercitationem corrupti harum cupiditate dolorum sunt tempora ea! Deserunt accusantium hic culpa, tenetur enim nihil velit perspiciatis laborum laboriosam vero dolore. Praesentium incidunt ratione iste. Eius incidunt nam quisquam recusandae deleniti animi reprehenderit explicabo impedit iure, quis ipsam amet voluptatem repudiandae ratione, optio itaque corporis. Explicabo facilis enim obcaecati laborum incidunt vero voluptate repellat, suscipit ipsa rem praesentium culpa veniam nobis assumenda reprehenderit necessitatibus sunt. Perferendis pariatur qui alias nemo incidunt tenetur non, expedita ex blanditiis? Nesciunt laborum, quisquam aut beatae tenetur hic reprehenderit eius sed sequi dicta corrupti optio aspernatur odit ipsa asperiores nobis magnam tempora repellendus eum illum? Ex rerum saepe quasi. Cumque iste sit laborum quos, magni perferendis! Labore necessitatibus aut impedit est incidunt, facilis assumenda, ullam excepturi sit cum ea iste. Quos facilis maiores voluptate, error voluptatibus, tempora repellendus unde quae provident porro esse incidunt sequi? Dolorem earum ipsum pariatur. Ad ratione alias sapiente repellat molestiae nisi dicta, dolores, iure perferendis amet fugiat odio quod. Eius, enim libero! Esse repellat rem voluptates cumque quos soluta sit ipsam quod? Beatae cupiditate labore esse tempore incidunt ipsum maxime saepe perferendis dicta! Earum iure quis natus reiciendis repellendus labore dolorum eaque hic illum dolore non doloremque deleniti aut aliquam ducimus quo, quidem explicabo sequi? Explicabo, inventore exercitationem nihil sapiente perferendis autem dolor doloremque iusto nisi, pariatur molestias atque velit numquam praesentium eaque quod at suscipit quaerat aspernatur, quam expedita veniam impedit? Quae alias possimus quo commodi ex odit inventore maxime repellendus iusto reprehenderit fugiat ea hic nisi laborum aliquam, saepe debitis aspernatur nulla totam harum eum cum? Eaque distinctio, sed consectetur quae perspiciatis error magnam tempore qui, enim suscipit voluptatem vel dolorum a fugiat minima sapiente reiciendis autem at numquam amet, neque illo! Blanditiis ullam aliquam minus in nulla odio debitis incidunt amet dignissimos voluptate iusto itaque ratione magnam, ipsam repudiandae, consequuntur quis culpa velit. Cumque, alias vero! Adipisci aliquam sunt blanditiis tempora corporis repellendus qui, rerum, doloribus provident facilis maiores nihil tenetur nobis, in rem reiciendis? Autem, sit maiores soluta dolorem aliquam sapiente. Sequi, id. Quam, in, adipisci quod similique aliquid, eveniet et quae maxime tenetur temporibus optio fuga. Fugiat tenetur voluptas cumque? Cupiditate veniam dolor illo, earum ipsa laudantium odio sequi quaerat recusandae magni odit consectetur repudiandae atque quasi incidunt itaque eum, libero ex culpa inventore ad eveniet a. Ipsa soluta quia delectus dolor aliquid commodi voluptates, dignissimos ex modi fugit porro iusto, quis ad rem maiores unde, inventore veniam. Officia neque numquam natus eum libero, ab nisi adipisci laborum inventore autem ex dicta rem tempora explicabo id veritatis similique illo nihil perspiciatis. Numquam tenetur expedita sunt in quas quisquam commodi, optio aperiam molestiae, officia a inventore nam cum illum cupiditate magnam distinctio quaerat ullam accusantium dicta voluptatibus fugit.
+          <SimpleGrid
+            columns={{ base: 1, xl: 3 }}
+            spacing={'10'}
+            mt={16}
+            zIndex='2'
+            position='relative'
+            mx={'auto'}>
+            {testimonials.map((cardInfo, index) => (
+              <Flex
+                key={index}
+                boxShadow={'lg'}
+                maxW={'640px'}
+                direction={{ base: 'column-reverse', md: 'row' }}
+                width={'full'}
+                rounded={'xl'}
+                p={10}
+                justifyContent={'space-between'}
+                position={'relative'}
+                bg={useColorModeValue('white', 'gray.800')}
+                _before={{
+                  content: '""',
+                  position: 'absolute',
+                  zIndex: '-1',
+                  height: 'full',
+                  maxW: '640px',
+                  width: 'full',
+                  filter: 'blur(40px)',
+                  transform: 'scale(0.98)',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover',
+                  top: 0,
+                  left: 0,
+                  backgroundImage: backgrounds[index % 4],
+                }}>
+                <Flex
+                  direction={'column'}
+                  textAlign={'left'}
+                  justifyContent={'space-between'}>
+                  <chakra.p
+                    fontFamily={'Inter'}
+                    fontWeight={'medium'}
+                    fontSize={'15px'}
+                    pb={4}>
+                    {cardInfo.content}
+                  </chakra.p>
+                  <chakra.p fontFamily={'Work Sans'} fontWeight={'bold'} fontSize={14}>
+                    {cardInfo.name}
+                    <chakra.span
+                      fontFamily={'Inter'}
+                      fontWeight={'medium'}
+                      color={'gray.500'}>
+                      {' '}
+                      - {cardInfo.role}
+                    </chakra.span>
+                  </chakra.p>
+                </Flex>
+                <Avatar
+                  src={cardInfo.avatar}
+                  height={'80px'}
+                  width={'80px'}
+                  alignSelf={'center'}
+                  m={{ base: '0 0 35px 0', md: '0 0 0 50px' }}
+                />
+              </Flex>
+            ))}
+          </SimpleGrid>
         </Container>
       </Box>
     </div >

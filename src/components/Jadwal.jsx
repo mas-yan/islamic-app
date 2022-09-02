@@ -24,10 +24,9 @@ import Adzan from "./../assets/sound/adzan.mp3";
 const Jadwal = () => {
   // Memformat tanggal
   let d = new Date()
-  const dd = String(d.getDate()).padStart(2, '0')
+  const dd = d.getDate()
   const mm = String(d.getMonth() + 1).padStart(2, '0') //January is 0!
   const yyyy = d.getFullYear()
-
   // get data from local
   const fromLocal = JSON.parse(localStorage.getItem('kota') || JSON.stringify({ value: '1301', label: 'KOTA JAKARTA' }));
   // use state for
@@ -40,7 +39,7 @@ const Jadwal = () => {
   const [sholat, setSholat] = useState([])
   const [sholatDay, setSholatDay] = useState([])
   const [jam, setJam] = useState(null)
-  const [today, setToday] = useState(Number(dd))
+  const [today, setToday] = useState(dd)
   const [time, setTime] = useState(null)
   const [next, setNext] = useState({ name: '-', countDown: 0 })
 
@@ -131,7 +130,7 @@ const Jadwal = () => {
     // next jadwal
     if (time) {
       const times = Object.values(time.jadwal)
-        .map((v) => new Date(`${yyyy}-${mm}-${today}T${v}`).getTime())
+        .map((v) => new Date(`${yyyy}-${mm}-${String(today).padStart(2, '0')}T${v}`).getTime())
         .map((v, i) => [Object.keys(time.jadwal)[i], v - Date.now()])
         .sort((a, b) => a[1] - b[1])
         .filter((v) => v[1] > 0)
@@ -148,7 +147,7 @@ const Jadwal = () => {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
         const seconds = Math.floor((distance % (1000 * 60)) / 1000)
         setNext({
-          name: times[1][0],
+          name: times[0][0],
           countDown: `${(hours < 10 ? '0' : '') + hours}:${(minutes < 10 ? '0' : '') + minutes
             }:${(seconds < 10 ? '0' : '') + seconds}`,
         })
@@ -169,11 +168,8 @@ const Jadwal = () => {
         delete data.data.jadwal['terbit']
         delete data.data.jadwal['imsak']
         setTime(data.data)
-        getNext()
-
       })
       .catch((e) => {
-        // setError(true)
         console.log(e);
       })
 
@@ -192,13 +188,9 @@ const Jadwal = () => {
   // Memutar audio adzan
   useEffect(() => {
     const adzan = document.getElementById('adzan')
-    // document.body.onclick = () => {
-    //   adzan.play()
-    //   adzan.pause()
-    // }
+
 
     const { name, countDown } = next
-    // console.log(name);
     switch (name) {
       case 'subuh':
       case 'dzuhur':

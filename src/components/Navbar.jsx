@@ -58,7 +58,7 @@ function Navbar() {
           size={'md'}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           aria-label={'Open Menu'}
-          display={{ md: 'none' }}
+          display={{ lg: 'none' }}
           onClick={isOpen ? onClose : onOpen}
         />
         <Link
@@ -75,7 +75,7 @@ function Navbar() {
           as={'nav'}
           mr={{ md: '50', lg: '150px' }}
           spacing={2}
-          display={{ base: 'none', md: 'flex' }}>
+          display={{ base: 'none', lg: 'flex' }}>
           {Links.map((link, index) => (
             <Link
               key={index}
@@ -103,7 +103,7 @@ function Navbar() {
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <Box pb={4} display={{ md: 'none' }}>
+        <Box pb={4} display={{ lg: 'none' }}>
           <Stack as={'nav'} spacing={4}>
             {Links.map((link) => (
               <Link

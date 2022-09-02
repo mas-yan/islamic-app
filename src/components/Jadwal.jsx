@@ -148,7 +148,7 @@ const Jadwal = () => {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
         const seconds = Math.floor((distance % (1000 * 60)) / 1000)
         setNext({
-          name: times[0][0],
+          name: times[1][0],
           countDown: `${(hours < 10 ? '0' : '') + hours}:${(minutes < 10 ? '0' : '') + minutes
             }:${(seconds < 10 ? '0' : '') + seconds}`,
         })
@@ -167,6 +167,7 @@ const Jadwal = () => {
         delete data.data.jadwal['date']
         delete data.data.jadwal['dhuha']
         delete data.data.jadwal['terbit']
+        delete data.data.jadwal['imsak']
         setTime(data.data)
         getNext()
 

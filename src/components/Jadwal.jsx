@@ -16,7 +16,7 @@ import {
   Skeleton,
   Spinner
 } from '@chakra-ui/react'
-import { ArrowRightIcon, ArrowLeftIcon, TriangleDownIcon, CalendarIcon, TimeIcon } from '@chakra-ui/icons';
+import { ArrowForwardIcon, ArrowBackIcon, TriangleDownIcon, CalendarIcon, TimeIcon } from '@chakra-ui/icons';
 import City from './City';
 import { useEffect, useState } from 'react';
 import Adzan from "./../assets/sound/adzan.mp3";
@@ -222,9 +222,9 @@ const Jadwal = () => {
             <Text display={'inline'} color={useColorModeValue('blue.700', 'white')} fontWeight='bold'>Waktu Sholat Daerah <span onClick={onOpen} style={{ cursor: 'pointer' }}> {value.label}<TriangleDownIcon color={useColorModeValue('blue.700', 'white')} pb={{ base: 1, md: 2 }} w={{ base: 5, md: 6 }} h={{ base: 5, md: 6 }} /></span></Text>
             <City value={value} onChange={handleChange} isOpen={isOpen} onClose={onClose} />
           </Heading>
-          <button style={{ margin: '0 10px' }} onClick={() => { getPreviousDate() }}><ArrowLeftIcon fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')} /></button>
+          <button style={{ margin: '0 10px' }} onClick={() => { getPreviousDate() }}><ArrowBackIcon w={6} h={6} fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')} /></button>
           <Text display={'inline'} fontWeight='bold' fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')}>{month}</Text>
-          <button style={{ margin: '0 10px' }} onClick={() => { getNextDate() }}><ArrowRightIcon fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')} /></button>
+          <button style={{ margin: '0 10px' }} onClick={() => { getNextDate() }}><ArrowForwardIcon fontSize={{ base: 'xs', md: 'md' }} color={useColorModeValue('blue.700', 'white')} w={6} h={6} /></button>
           <Box shadow={'base'} py='1.5' m='2.5' bg={useColorModeValue('white', 'gray.300')} borderRadius={'md'}>
             {jam ? <Text color={'black'} fontWeight='normal'><CalendarIcon mb='1.5' /> {sholatDay.tanggal}</Text> : <Skeleton height='5' w='130px' display={'inline-block'} mb='-1' />}
             <Heading fontSize={'2xl'} py='2'>

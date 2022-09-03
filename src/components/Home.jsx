@@ -390,7 +390,7 @@ function Feature() {
       title:
         'jadwal Sholat',
       content: [
-        "Jadwal seluruh Indonesia",
+        "seluruh kota di Indonesia",
         "Disertai adzan",
       ],
     },
@@ -422,7 +422,7 @@ function Feature() {
                     <Icon as={CheckIcon} />
                   </Box>
                   <VStack align={'start'}>
-                    <Text fontWeight={600} fontSize={'xl'}>{data.title}</Text>
+                    <Text fontWeight={600} fontSize={'lg'}>{data.title}</Text>
                     {data.content.map((item, index) =>
                       <Box key={index} color={useColorModeValue('gray.500', 'gray.300')} fontSize={{ lg: 14, md: 10 }}>
                         <Icon mr='2' as={MinusIcon} />
@@ -487,7 +487,7 @@ function Ayat() {
   return (
     <Box bg={useColorModeValue('white', 'gray.800')}>
       <Container maxW={'6xl'} py={16}>
-        <Heading textAlign='center' color={useColorModeValue('blue.700', 'blue.400')} mb='10' fontSize={'3xl'}>Random Ayat</Heading>
+        <Heading textAlign='center' color={useColorModeValue('blue.700', 'blue.400')} mb='6' fontSize={'3xl'}>Random Ayat</Heading>
         <Box rounded={'xl'} p='4' bg='blue.700' color='white' shadow={'xl'}>
           <Text textAlign='right' fontWeight='bold' fontSize={'2xl'}>{ayat}</Text>
           <Text textAlign='left' fontWeight='bold' mt='2' fontSize={'xl'}>{surat}</Text>

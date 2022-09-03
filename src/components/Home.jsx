@@ -54,7 +54,7 @@ function Header() {
         </Text>
       </Heading>
       <Text textAlign={'center'} color='white'>
-        Sebuah lentera yang menyediakan informasi mengenai dunia islam
+        Sebuah sinar lentera yang menyediakan informasi mengenai dunia islam
       </Text>
       <Stack
         direction={'column'}

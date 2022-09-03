@@ -1,7 +1,6 @@
 import {
   Box,
   Heading,
-  HStack,
   VStack,
   Text,
   useColorModeValue,
@@ -15,7 +14,8 @@ import {
   Flex,
   Image,
   Link,
-  chakra
+  chakra,
+  HStack
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
@@ -193,7 +193,7 @@ function Jadwal() {
 
 function Product() {
 
-  const testimonials = [
+  const products = [
     {
       title:
         'Al Quran',
@@ -282,7 +282,7 @@ function Product() {
           zIndex='2'
           position='relative'
           mx={'auto'}>
-          {testimonials.map((cardInfo, index) => (
+          {products.map((cardInfo, index) => (
             <Link
               key={index}
               as={NavLink}
@@ -355,6 +355,55 @@ function Product() {
 function Feature() {
   const [quotes, setQuotes] = useState('');
 
+  const features = [
+    {
+      title:
+        'Al Quran',
+      content: [
+        'dengan latin dan terjemahan',
+        "Disertai murottal",
+      ],
+    },
+    {
+      title:
+        'Doa',
+      content: [
+        "Doa sehari hari",
+        'Lebih dari 200 doa',
+      ],
+    },
+    {
+      title:
+        'Tahlil',
+      content: [
+        "Lengkap dengan terjemahan",
+      ],
+    },
+    {
+      title:
+        'Asmaul Husna',
+      content: [
+        "Lengkap dengan arti",
+      ],
+    },
+    {
+      title:
+        'jadwal Sholat',
+      content: [
+        "Jadwal seluruh Indonesia",
+        "Disertai adzan",
+      ],
+    },
+    {
+      title:
+        'Berita Islami',
+      content: [
+        "Berita islam terkini",
+        "Dari 3 media yang berbeda",
+      ],
+    },
+  ];
+
   useEffect(() => {
     const random = myData[Math.floor(Math.random() * myData.length)];
     setQuotes(random)
@@ -365,37 +414,26 @@ function Feature() {
       <Container py={16} maxW={'8xl'}>
         <SimpleGrid columns={{ md: 2, base: 1 }} spacing={5}>
           <Stack spacing={4} as={Container}>
-            <Heading fontSize={'3xl'} textAlign='center'>This is the headline</Heading>
+            <Heading color={useColorModeValue('blue.700', 'blue.400')} mb={{ lg: '10' }} fontSize={{ md: '3xl', base: '2xl' }}>Apa Yang Ada Di Ruang Islam?</Heading>
             <SimpleGrid columns={{ md: 2, base: 1 }} spacing={5}>
-              {[...Array(4)].map((x, i) =>
-                <Flex key={i} justifyContent='center' align={'top'}>
+              {features.map((data, i) =>
+                <HStack key={i} align={'top'}>
                   <Box mr='2' color={'green.400'}>
                     <Icon as={CheckIcon} />
                   </Box>
                   <VStack align={'start'}>
-                    <Text fontWeight={600}>Al Quran Lengkap</Text>
-                    <Text color={useColorModeValue('gray.500', 'gray.400')} fontWeight='bold' fontSize={14}>
-                      <Icon mr='2' as={MinusIcon} />
-                      Lorem, ipsum.
-                    </Text>
-                    <Text color={useColorModeValue('gray.500', 'gray.400')} fontWeight='bold' fontSize={14}>
-                      <Icon mr='2' as={MinusIcon} />
-                      Lorem, ipsum.
-                    </Text>
-                    <Text color={useColorModeValue('gray.500', 'gray.400')} fontWeight='bold' fontSize={14}>
-                      <Icon mr='2' as={MinusIcon} />
-                      Lorem, ipsum.
-                    </Text>
+                    <Text fontWeight={600} fontSize={'xl'}>{data.title}</Text>
+                    {data.content.map((item, index) =>
+                      <Box key={index} color={useColorModeValue('gray.500', 'gray.300')} fontSize={{ lg: 14, md: 10 }}>
+                        <Icon mr='2' as={MinusIcon} />
+                        <Text display={'inline'} fontWeight={600}>{item}</Text>
+                      </Box>
+                    )}
                   </VStack>
-                </Flex>
+                </HStack>
               )}
             </SimpleGrid>
             <br />
-            <Box rounded='md'>
-              <Heading color={useColorModeValue('blue.700', 'blue.400')} pb='2' fontSize={'md'} textAlign='center'>Quotes Untukmu :</Heading>
-              <Text fontWeight='bold' fontSize={'2xl'} textAlign={'center'}>{quotes.arabic}</Text>
-              <Text textAlign={'center'}>{quotes.arti}</Text>
-            </Box>
           </Stack>
           <Box
             position={'relative'}
@@ -406,7 +444,7 @@ function Feature() {
             rounded={'2xl'}>
             <Image
               src={Maskot}
-              h={{ md: '450px', lg: '500px' }}
+              h={{ md: '450px', lg: '450px' }}
               objectFit='cover'
               zIndex={'2'}
               position={'relative'}
@@ -421,8 +459,42 @@ function Feature() {
             />
           </Box>
         </SimpleGrid>
-      </Container>
+        <Box rounded='md' mt='10' mx={{ lg: 10 }}>
+          <Heading color={useColorModeValue('blue.700', 'blue.400')} pb='2' fontSize={'md'} textAlign='center'>Quotes Untukmu :</Heading>
+          <Text fontWeight='bold' fontSize={'2xl'} textAlign={'center'}>{quotes.arabic}</Text>
+          <Text textAlign={'center'}>{quotes.arti}</Text>
+        </Box>
+      </Container >
     </Box >
+  )
+}
+
+function Ayat() {
+  const [ayat, setAyat] = useState('');
+  const [surat, setSurat] = useState('');
+  const [arti, setArti] = useState('');
+
+  const getAyat = async () => {
+    const data = await fetch('https://api.banghasan.com/quran/format/json/acak')
+    const response = await data.json()
+    setAyat(response.acak.ar.teks)
+    setSurat(`Q.S ${response.surat.nama} ${response.surat.nomor}:${response.acak.ar.ayat}`)
+    setArti(response.acak.id.teks)
+  }
+  useEffect(() => {
+    getAyat()
+  }, []);
+  return (
+    <Box bg={useColorModeValue('white', 'gray.800')}>
+      <Container maxW={'6xl'} py={16}>
+        <Heading textAlign='center' color={useColorModeValue('blue.700', 'blue.400')} mb='10' fontSize={'3xl'}>Random Ayat</Heading>
+        <Box rounded={'xl'} p='4' bg='blue.700' color='white' shadow={'xl'}>
+          <Text textAlign='right' fontWeight='bold' fontSize={'2xl'}>{ayat}</Text>
+          <Text textAlign='left' fontWeight='bold' mt='2' fontSize={'xl'}>{surat}</Text>
+          <Text textAlign='left'>{arti}</Text>
+        </Box>
+      </Container>
+    </Box>
   )
 }
 
@@ -436,6 +508,7 @@ function Home() {
       </div>
       <Product />
       <Feature />
+      <Ayat />
     </div >
   )
 }

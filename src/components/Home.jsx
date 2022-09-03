@@ -47,14 +47,14 @@ function Header() {
         zIndex={1}
         color='white'>
         <Text ml='2' as={'span'} color={'white'}>
-          Ruang
+          Lentera
         </Text>
         <Text ml='2' as={'span'} color={'blue.400'}>
           Islam
         </Text>
       </Heading>
       <Text textAlign={'center'} color='white'>
-        Sebuah ruang yang menyediakan informasi mengenai dunia islam
+        Sebuah lentera yang menyediakan informasi mengenai dunia islam
       </Text>
       <Stack
         direction={'column'}
@@ -414,7 +414,7 @@ function Feature() {
       <Container py={16} maxW={'8xl'}>
         <SimpleGrid columns={{ md: 2, base: 1 }} spacing={5}>
           <Stack spacing={4} as={Container}>
-            <Heading color={useColorModeValue('blue.700', 'blue.400')} mb={{ lg: '10' }} fontSize={{ md: '3xl', base: '2xl' }}>Apa Yang Ada Di Ruang Islam?</Heading>
+            <Heading color={useColorModeValue('blue.700', 'blue.400')} mb={{ lg: '10' }} fontSize={{ md: '3xl', base: '2xl' }}>Apa Yang Ada Di Lentera Islam?</Heading>
             <SimpleGrid columns={{ md: 2, base: 1 }} spacing={5}>
               {features.map((data, i) =>
                 <HStack key={i} align={'top'}>

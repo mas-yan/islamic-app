@@ -1,4 +1,4 @@
-import { NavLink, useResolvedPath } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -68,7 +68,7 @@ function Navbar() {
         >
           <HStack alignItems={'center'}>
             <img src={Logo} alt="Qur'an Digital" />
-            <Text color={useColorModeValue('blue.700', 'white')} fontSize='2xl'>Ruang Islam</Text>
+            <Text color={useColorModeValue('blue.700', 'white')} fontSize='2xl'>Lentera Islam</Text>
           </HStack>
         </Link>
         <HStack

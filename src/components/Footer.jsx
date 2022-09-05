@@ -13,7 +13,7 @@ import Logo from "../assets/img/logo.png";
 export default function SmallWithLogoLeft() {
   return (
     <Box
-      bg='gray.800'
+      bg='gray.900'
       color='gray.200'>
       <Container
         as={Stack}
@@ -32,7 +32,7 @@ export default function SmallWithLogoLeft() {
           />
           <Text color='gray.200' fontWeight='bold'>Lentera Islam</Text>
         </HStack>
-        <Text>© 2022 <chakra.span color={'blue.300'}><a target="_blank" href="https://mas-yan.github.io/">Riyan Alfian</a></chakra.span>. All Rights Reserved</Text>
+        <Text><chakra.a href='credit.html'>©</chakra.a> 2022 <chakra.span color={'blue.300'}><a target="_blank" href="https://mas-yan.github.io/">Riyan Alfian</a></chakra.span>. All Rights Reserved</Text>
         <Text>
           Dibuat dengan <Icon viewBox="0 0 40 35" boxSize={5} color={'red.400'}>
             <path

@@ -414,8 +414,8 @@ function Feature() {
       <Container py={16} maxW={'8xl'}>
         <SimpleGrid columns={{ md: 2, base: 1 }} spacing={5}>
           <Stack spacing={4} as={Container}>
-            <Heading color={useColorModeValue('blue.700', 'blue.400')} mb={{ lg: '10' }} fontSize={{ md: '3xl', base: '2xl' }}>Apa Yang Ada Di Lentera Islam?</Heading>
-            <SimpleGrid columns={{ md: 2, base: 1 }} spacing={5}>
+            <Heading mb={{ lg: '10' }} textAlign={{ md: 'left', base: 'center' }} fontSize={{ md: '3xl', base: '2xl' }}>Apa Yang Ada Di Lentera Islam?</Heading>
+            <SimpleGrid columns={{ md: 2, base: 1 }} spacing={{ md: 8, base: 5 }}>
               {features.map((data, i) =>
                 <HStack key={i} align={'top'}>
                   <Box mr='2' color={'green.400'}>
@@ -441,6 +441,7 @@ function Feature() {
             w={{ lg: '400px', md: '350px', }}
             bg={useColorModeValue('white', 'gray.700')}
             display={{ md: 'block', base: 'none' }}
+            shadow='md'
             rounded={'2xl'}>
             <Image
               src={Maskot}
@@ -460,7 +461,7 @@ function Feature() {
           </Box>
         </SimpleGrid>
         <Box rounded='md' mt='10' mx={{ lg: 10 }}>
-          <Heading color={useColorModeValue('blue.700', 'blue.400')} pb='2' fontSize={'md'} textAlign='center'>Quotes Untukmu :</Heading>
+          <Heading pb='2' fontWeight={'bold'} color={useColorModeValue('blue.700', 'blue.400')} fontSize={'lg'} textAlign='center'>Quotes Untukmu :</Heading>
           <Text fontWeight='bold' fontSize={'2xl'} textAlign={'center'}>{quotes.arabic}</Text>
           <Text textAlign={'center'}>{quotes.arti}</Text>
         </Box>
@@ -485,16 +486,14 @@ function Ayat() {
     getAyat()
   }, []);
   return (
-    <Box bg={useColorModeValue('white', 'gray.700')}>
-      <Container maxW={'6xl'} py={16}>
-        <Heading textAlign='center' color={useColorModeValue('blue.700', 'blue.400')} mb='6' fontSize={'3xl'}>Random Ayat</Heading>
-        <Box rounded={'xl'} p='4' bg='blue.700' color='white' shadow={'xl'}>
-          <Text textAlign='right' fontWeight='bold' fontSize={'2xl'}>{ayat}</Text>
-          <Text textAlign='left' fontWeight='bold' mt='2' fontSize={'xl'}>{surat}</Text>
-          <Text textAlign='left'>{arti}</Text>
-        </Box>
-      </Container>
-    </Box>
+    <Box>
+      <Container textAlign='center' maxW={'6xl'} py={16}>
+        <Heading color={useColorModeValue('blue.700', 'blue.400')} mb='6' fontSize={'3xl'}>Random Ayat</Heading>
+        <Text fontWeight='bold' fontSize={'2xl'}>{ayat}</Text>
+        <Text my={{ md: '6', base: 4 }}>{arti}</Text>
+        <Text fontWeight='600' fontSize={'xl'}>{surat}</Text>
+      </Container >
+    </Box >
   )
 }
 

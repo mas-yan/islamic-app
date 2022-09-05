@@ -11,7 +11,8 @@ import {
   useColorMode,
   Text,
   useDisclosure,
-  Collapse
+  Collapse,
+  Image
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import Logo from "../assets/img/logo.png";
@@ -66,8 +67,8 @@ function Navbar() {
           to={'/'}
           style={{ textDecoration: 'none' }}
         >
-          <HStack alignItems={'center'}>
-            <img src={Logo} alt="Qur'an Digital" />
+          <HStack alignItems={'center'} mr='6'>
+            <Image src={Logo} boxSize={'50px'} rounded='md' alt="Qur'an Digital" />
             <Text color={useColorModeValue('blue.700', 'white')} fontSize='2xl'>Lentera Islam</Text>
           </HStack>
         </Link>

@@ -53,7 +53,7 @@ function Header() {
           Islam
         </Text>
       </Heading>
-      <Text textAlign={'center'} color='white'>
+      <Text textAlign={'center'} px='2' color='white'>
         Sebuah sinar lentera yang menyediakan informasi mengenai dunia islam
       </Text>
       <Stack
@@ -485,7 +485,7 @@ function Ayat() {
     getAyat()
   }, []);
   return (
-    <Box bg={useColorModeValue('white', 'gray.800')}>
+    <Box bg={useColorModeValue('white', 'gray.700')}>
       <Container maxW={'6xl'} py={16}>
         <Heading textAlign='center' color={useColorModeValue('blue.700', 'blue.400')} mb='6' fontSize={'3xl'}>Random Ayat</Heading>
         <Box rounded={'xl'} p='4' bg='blue.700' color='white' shadow={'xl'}>

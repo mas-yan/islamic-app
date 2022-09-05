@@ -1,0 +1,28 @@
+const Credit = () => {
+  return (
+    <div>
+      https://api.myquran.com/
+
+      quran
+      <a target="_blank" href="https://icons8.com/icon/CmsNPHks3Lix/quran">Quran</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+      <a target="_blank" href="https://icons8.com/icon/52z8gRNVtQBv/quran">Quran</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+      <a target="_blank" href="https://icons8.com/icon/PXFcjKPYVMkt/pray">Pray</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+      <a target="_blank" href="https://icons8.com/icon/1GLs9SJ8jQug/rosary">Rosary</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+      <a target="_blank" href="https://icons8.com/icon/Xoowyt2KIU6X/islam">Islam</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+      <a target="_blank" href="https://icons8.com/icon/gK1Eqo1IyXm4/ramadan-timetable">Ramadan Timetable</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+      <a target="_blank" href="https://icons8.com/icon/ZBwv58rtKC7l/news">News</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+
+      http://api.aladhan.com/v1/calendarByCity?city=kendal&country=Indonesia&method=2&month=07&year=2022
+      https://www.kindpng.com/imgv/bmwhR_representation-symbol-figure-art-islamic-geometric-border-islamic/
+
+      https://islamic-api-zhirrr.vercel.app/api/asmaulhusna
+      https://www.pngegg.com/en/png-zdrzy
+      https://api-berita-indonesia.vercel.app/
+
+      <a href='https://pngtree.com/so/headdress'>headdress png from pngtree.com/</a>
+
+      <a href="https://id.pngtree.com/so/man-clipart">man clipart png dari id.pngtree.com</a>
+    </div>
+  )
+}
+export default Credit;

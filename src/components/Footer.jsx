@@ -9,6 +9,7 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import Logo from "../assets/img/logo.png";
+import { NavLink } from 'react-router-dom';
 
 export default function SmallWithLogoLeft() {
   return (
@@ -32,7 +33,7 @@ export default function SmallWithLogoLeft() {
           />
           <Text color='gray.200' fontWeight='bold'>Lentera Islam</Text>
         </HStack>
-        <Text><chakra.a href='credit.html'>©</chakra.a> 2022 <chakra.span color={'blue.300'}><a target="_blank" href="https://mas-yan.github.io/">Riyan Alfian</a></chakra.span>. All Rights Reserved</Text>
+        <Text><NavLink to={'/credit'}>©</NavLink> 2022 <chakra.span color={'blue.300'}><a target="_blank" href="https://mas-yan.github.io/">Riyan Alfian</a></chakra.span>. All Rights Reserved</Text>
         <Text>
           Dibuat dengan <Icon viewBox="0 0 40 35" boxSize={5} color={'red.400'}>
             <path

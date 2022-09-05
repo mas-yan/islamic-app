@@ -68,7 +68,7 @@ function Navbar() {
           style={{ textDecoration: 'none' }}
         >
           <HStack alignItems={'center'} mr='6'>
-            <Image src={Logo} boxSize={'50px'} rounded='md' alt="Qur'an Digital" />
+            <Image src={Logo} boxSize={'50px'} objectFit='cover' rounded='md' alt="Qur'an Digital" />
             <Text color={useColorModeValue('blue.700', 'white')} fontSize='2xl'>Lentera Islam</Text>
           </HStack>
         </Link>

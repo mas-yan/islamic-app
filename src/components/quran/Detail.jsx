@@ -1,5 +1,5 @@
 import {
-  Box, SimpleGrid, Text, Link, Image, Accordion, AccordionItem, AccordionPanel, AccordionIcon, AccordionButton, Button, useColorModeValue, SkeletonText, Heading, Grid, GridItem, Container, Icon,
+  Box, SimpleGrid, Text, Link, Image, Accordion, Spinner, AccordionItem, AccordionPanel, AccordionIcon, AccordionButton, Button, useColorModeValue, SkeletonText, Heading, Grid, GridItem, Container, Icon,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 import { useEffect, useState, useRef } from "react";
@@ -18,6 +18,7 @@ function Detail() {
   const [status, setStatus] = useState(true)
   const [playing, setPlaying] = useState(false);
   const [audio, setAudio] = useState(new Audio());
+  const [load, setLoad] = useState(0);
   let audios = useRef();
 
   // fetch data from api
@@ -45,7 +46,9 @@ function Detail() {
   }
 
   // togle play sound
-  const toggle = () => setPlaying(!playing);
+  const toggle = () => {
+    setPlaying(!playing);
+  }
 
 
   useEffect(() => {
@@ -66,6 +69,17 @@ function Detail() {
       audios.current.pause()
     }
   }, [])
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const audioLoaded = audios.current.readyState
+      setLoad(audioLoaded)
+      console.log(audioLoaded);
+    }, 1000);
+
+    // clear interval on re-render to avoid memory leaks
+    return () => clearInterval(intervalId);
+  })
 
 
   // color ligh/dark
@@ -162,13 +176,21 @@ function Detail() {
                     <Button colorScheme='blue' onClick={toggle} p='3' mt='5' borderColor={'blue.400'} shadow='md' w='100%' borderWidth='2px' rounded={'md'}>
                       <Heading fontSize={'l'} textAlign='center'>
                         {playing ?
-                          <Icon viewBox="0 0 320 512" mb='1' ><path fill='currentColor' d="M272 63.1l-32 0c-26.51 0-48 21.49-48 47.1v288c0 26.51 21.49 48 48 48L272 448c26.51 0 48-21.49 48-48v-288C320 85.49 298.5 63.1 272 63.1zM80 63.1l-32 0c-26.51 0-48 21.49-48 48v288C0 426.5 21.49 448 48 448l32 0c26.51 0 48-21.49 48-48v-288C128 85.49 106.5 63.1 80 63.1z" />
-                          </Icon>
+                          load != 4 ?
+                            <Spinner
+                              speed='0.65s'
+                              emptyColor='gray.200'
+                              color='blue.500'
+                              size='sm'
+                            />
+                            :
+                            <Icon viewBox="0 0 320 512" mb='1' ><path fill='currentColor' d="M272 63.1l-32 0c-26.51 0-48 21.49-48 47.1v288c0 26.51 21.49 48 48 48L272 448c26.51 0 48-21.49 48-48v-288C320 85.49 298.5 63.1 272 63.1zM80 63.1l-32 0c-26.51 0-48 21.49-48 48v288C0 426.5 21.49 448 48 448l32 0c26.51 0 48-21.49 48-48v-288C128 85.49 106.5 63.1 80 63.1z" />
+                            </Icon>
                           :
                           <Icon viewBox="0 0 384 512" mb='1' ><path fill='currentColor' d="M361 215C375.3 223.8 384 239.3 384 256C384 272.7 375.3 288.2 361 296.1L73.03 472.1C58.21 482 39.66 482.4 24.52 473.9C9.377 465.4 0 449.4 0 432V80C0 62.64 9.377 46.63 24.52 38.13C39.66 29.64 58.21 29.99 73.03 39.04L361 215z" />
                           </Icon>
                         }
-                        <Text display={'inline-block'} ml='2'>{playing ? "Stop" : "Play"} Audio</Text>
+                        <Text display={'inline-block'} ml='2'>{playing ? load != 4 ? 'loading' : "Stop" : "Play"} Audio</Text>
                       </Heading>
                     </Button>
                   </GridItem>

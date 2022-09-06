@@ -414,7 +414,7 @@ function Feature() {
       <Container py={16} maxW={'8xl'}>
         <SimpleGrid columns={{ md: 2, base: 1 }} spacing={5}>
           <Stack spacing={4} as={Container}>
-            <Heading mb={{ lg: '10' }} textAlign={{ md: 'left', base: 'center' }} fontSize={{ md: '3xl', base: '2xl' }}>Apa Yang Ada Di Lentera Islam?</Heading>
+            <Heading mb={{ lg: '10' }} color={useColorModeValue('gray.600', 'gray.200')} textAlign={{ md: 'left', base: 'center' }} fontSize={{ md: '3xl', base: '2xl' }}>Apa Yang Ada Di Lentera Islam?</Heading>
             <SimpleGrid columns={{ md: 2, base: 1 }} spacing={{ md: 8, base: 5 }}>
               {features.map((data, i) =>
                 <HStack key={i} align={'top'}>
@@ -422,7 +422,7 @@ function Feature() {
                     <Icon as={CheckIcon} />
                   </Box>
                   <VStack align={'start'}>
-                    <Text fontWeight={600} fontSize={'lg'}>{data.title}</Text>
+                    <Text fontWeight={600} color={useColorModeValue('blue.700', 'blue.400')} fontSize={'lg'}>{data.title}</Text>
                     {data.content.map((item, index) =>
                       <Box key={index} color={useColorModeValue('gray.500', 'gray.300')} fontSize={{ lg: 14, md: 10 }}>
                         <Icon mr='2' as={MinusIcon} />

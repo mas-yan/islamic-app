@@ -9,7 +9,7 @@ quran
 <a target="_blank" href="https://icons8.com/icon/gK1Eqo1IyXm4/ramadan-timetable">Ramadan Timetable</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 <a target="_blank" href="https://icons8.com/icon/ZBwv58rtKC7l/news">News</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
-http://api.aladhan.com/v1/calendarByCity?city=kendal&country=Indonesia&method=2&month=07&year=2022
+http://api.aladhan.com/v2/calendarByCity?city=kendal&country=Indonesia&method=2&month=07&year=2022
 https://www.kindpng.com/imgv/bmwhR_representation-symbol-figure-art-islamic-geometric-border-islamic/
 
 https://islamic-api-zhirrr.vercel.app/api/asmaulhusna

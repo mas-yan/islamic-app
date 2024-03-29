@@ -52,8 +52,8 @@ const Jadwal = () => {
     // fetch api
     try {
       let [perDay, perMonth] = await Promise.all([
-        fetch(`https://api.myquran.com/v1/sholat/jadwal/${value.value}/${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`),
-        fetch(`https://api.myquran.com/v1/sholat/jadwal/${value.value}/${now}`)
+        fetch(`https://api.myquran.com/v2/sholat/jadwal/${value.value}/${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`),
+        fetch(`https://api.myquran.com/v2/sholat/jadwal/${value.value}/${now}`)
       ]);
       const resultDay = await perDay.json()
       const resultMonth = await perMonth.json()
@@ -158,7 +158,7 @@ const Jadwal = () => {
   // Fetch jadwal sholat
   useEffect(() => {
     // url
-    const apiURL = `https://api.myquran.com/v1/sholat/jadwal/${value.value}/${yyyy}/${mm}/${today}`
+    const apiURL = `https://api.myquran.com/v2/sholat/jadwal/${value.value}/${yyyy}/${mm}/${today}`
     fetch(apiURL)
       .then((res) => res.json())
       .then((data) => {

@@ -31,7 +31,7 @@ export default function City({ onChange, isOpen, onClose }) {
   // fetch date from api
   const getLokasi = async () => {
     const response = await fetch(
-      `https://api.myquran.com/v1/sholat/kota/semua`
+      `https://api.myquran.com/v2/sholat/kota/semua`
     );
     const data = await response.json();
     const option = []

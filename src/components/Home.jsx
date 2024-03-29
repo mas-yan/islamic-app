@@ -86,7 +86,7 @@ function Jadwal() {
     const date = new Date()
     const now = day ? day : `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
     const response = await fetch(
-      `https://api.myquran.com/v1/sholat/jadwal/${value.value}/${now}`
+      `https://api.myquran.com/v2/sholat/jadwal/${value.value}/${now}`
     );
     const data = await response.json();
     if (data.status) {

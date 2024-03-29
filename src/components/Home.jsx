@@ -476,7 +476,7 @@ function Ayat() {
   const [arti, setArti] = useState('');
 
   const getAyat = async () => {
-    const data = await fetch('https://api.banghasan.com/quran/format/json/acak')
+    const data = await fetch('https://api.myquran.com/v2/quran/ayat/acak')
     const response = await data.json()
     setAyat(response.acak.ar.teks)
     setSurat(`Q.S ${response.surat.nama} ${response.surat.nomor}:${response.acak.ar.ayat}`)

@@ -478,9 +478,9 @@ function Ayat() {
   const getAyat = async () => {
     const data = await fetch('https://api.myquran.com/v2/quran/ayat/acak')
     const response = await data.json()
-    setAyat(response.acak.ar.teks)
-    setSurat(`Q.S ${response.surat.nama} ${response.surat.nomor}:${response.acak.ar.ayat}`)
-    setArti(response.acak.id.teks)
+    setAyat(response.data.ayat.arab)
+    setSurat(`Q.S ${response.data.info.surat.nama.id} ${response.data.info.surat.id}:${response.data.info.surat.nama.ar}`)
+    setArti(response.data.ayat.teks)
   }
   useEffect(() => {
     getAyat()

@@ -35,7 +35,7 @@ export default function City({ onChange, isOpen, onClose }) {
     );
     const data = await response.json();
     const option = []
-    data.map((item) => {
+    data.data.map((item) => {
       option.push({
         value: item.id,
         label: item.lokasi
